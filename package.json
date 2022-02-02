@@ -1,0 +1,58 @@
+{
+  "name": "sunbot",
+  "version": "0.0.1",
+  "description": "A WeChat bot powered by WeChaty",
+  "type": "module",
+  "engines": {
+    "node": ">=16",
+    "npm": ">=7"
+  },
+  "scripts": {
+    "build": "tsc",
+    "lint": "eslint \"src/*.ts\" \"tests/*.ts\"",
+    "postinstall": "check-node-version --node \">=16\" --npm \">=7\"",
+    "start": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" node src/main.ts",
+    "start:js": "node src/main.js",
+    "start:walnut": "cross-env WECHATY_LOG=verbose WECHATY_PUPPET=wechaty-puppet-walnut npm start",
+    "start:service": "cross-env WECHATY_LOG=verbose WECHATY_PUPPET=wechaty-puppet-service npm start",
+    "start:wechat:web": "cross-env WECHATY_LOG=verbose WECHATY_PUPPET=wechaty-puppet-wechat npm start",
+    "start:wechat:padlocal": "cross-env WECHATY_LOG=verbose WECHATY_PUPPET=wechaty-puppet-padlocal npm start",
+    "start:whatsapp:web": "cross-env WECHATY_LOG=verbose WECHATY_PUPPET=wechaty-puppet-whatsapp npm start",
+    "test": "npm-run-all lint test:version test:smoke",
+    "test:smoke": "cross-env NODE_OPTIONS=\"--no-warnings --loader=ts-node/esm\" tap \"tests/**/*.spec.ts\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ligen131/Sunbot.git"
+  },
+  "keywords": [],
+  "author": "ligen131 <1353055672@qq.com>",
+  "license": "GNU General Public License v3.0",
+  "dependencies": {
+    "dotenv": "^11.0.0",
+    "qrcode-terminal": "^0.12.0",
+    "wechaty": "^1.11.28",
+    "wechaty-plugin-contrib": "^1.11.1",
+    "wechaty-puppet-oicq": "^1.10.2",
+    "wechaty-puppet-walnut": "^1.11.6",
+    "wechaty-puppet-wechat": "^1.11.11",
+    "wechaty-puppet-wechat4u": "~1.11.1",
+    "wechaty-puppet-whatsapp": "~1.11.2",
+    "wechaty-puppet-xp": "^1.10.2",
+    "xhr2": "^0.2.1",
+    "xmlhttprequest": "^1.8.0"
+  },
+  "devDependencies": {
+    "@chatie/eslint-config": "^1.0.4",
+    "@chatie/git-scripts": "^0.6.2",
+    "@chatie/tsconfig": "^4.6.2",
+    "check-node-version": "^4.2.1",
+    "is-pr": "^2.0.0",
+    "wechaty-puppet-mock": "^1.11.11"
+  },
+  "git": {
+    "scripts": {
+      "pre-push": "npx git-scripts-pre-push"
+    }
+  }
+}
