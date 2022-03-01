@@ -4,14 +4,14 @@
 
 ## TODO
 
-- [x] Wrapper applications class "App" and make "CodeforcesRecentContest" as an App Class (App: Codeforces).
+- [x] ~~Wrapper applications class `App` and make `CodeforcesRecentContest` as an `App` Class (`App: Codeforces`).~~
 - [ ] Storage the received message throught database.
 - [ ] Set timed events (e.g. Codeforces contest list updating).
-- [ ] Generate wordcloud according to the statistic on the message (App: WordCloud).
-- [ ] Game: 1A2B (App: Game_1A2B).
-- [ ] Game: Daily Wordle (App: Game_Wordle).
-- [ ] Codeforces random daily problem (App: Codeforces: Dailypro).
-- [ ] Student enroll helper for some university in China (App: Stuenrollhelper).
+- [ ] Generate wordcloud according to the statistic on the message (`App: WordCloud`).
+- [ ] Game: 1A2B (`App: Game_1A2B`).
+- [ ] Game: Daily Wordle (`App: Game_Wordle`).
+- [ ] Codeforces random daily problem (`App: Codeforces: Dailypro`).
+- [ ] Student enroll helper for some university in China (`App: Stuenrollhelper`).
 - [ ] Make a command parser to parse every message which is probably a command.
 
 ## How to run the bot
