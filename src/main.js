@@ -7,7 +7,9 @@ import {
   log
 } from 'wechaty';
 import { Codeforces } from './App/Codeforces.js';
-import { AdminName, WechatyPuppet, WechatyPuppetToken } from './config.js';
+import { Wordcloud } from './App/Wordcloud/Wordcloud.js';
+import { WechatyPuppet, WechatyPuppetToken } from './config.js';
+import fs from 'fs';
 
 // import qrcodeTerminal from 'qrcode-terminal'
 
@@ -15,13 +17,10 @@ import {
   SunMessage,
  } from './Message.js';
 
-export { 
-  Sun_bot,
-  ContactAdmin,
-  AppCodeforces,
-};
+export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud };
 var ContactAdmin;
 var AppCodeforces = new Codeforces();
+var AppWordcloud = new Wordcloud();
 
 function onLogout (user) {
   log.info(Sun_bot.name(), '%s logout', user);
@@ -46,12 +45,19 @@ function onLogin (user) {
   log.info(Sun_bot.name(), '%s login', user);
 }
 
+async function clockEvent () {
+  log.info(`Clock Event started.`);
+  AppCodeforces.ClockeventFunc();
+  AppWordcloud.ClockeventFunc();
+}
+
 async function init () {
+  var dirExist = fs.existsSync('data/');
+  if(!dirExist) fs.mkdirSync('data/');
   log.info(`${Sun_bot.name()} started.`);
-  var ContactList = await Sun_bot.Contact.findAll({ name: AdminName });
-  ContactAdmin = ContactList[0];
 
   await AppCodeforces.InitFunc();
+  setInterval(clockEvent, 1000 * 30);
 }
 
 /*************** main ***************/

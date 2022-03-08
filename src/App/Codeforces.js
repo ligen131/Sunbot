@@ -1,5 +1,5 @@
 import { httpGET } from "../HttpRequest.js";
-import { sleep, TimeToDate } from "../Random.js";
+import { TimeToDate } from "../Random.js";
 import { Reply } from "../Send.js";
 import { App } from "./App.js";
 
@@ -10,6 +10,7 @@ class Codeforces extends App {
     super(1, "Codeforces");
     this.InitFunc = this.UpdateContestList;
     this.ClockeventFunc = this.UpdateContestList;
+    this.ExecuteFunc = this.CodeforcesParser;
 
     this.CacheContestList = undefined;
     this.LastCCLTime = 0;
@@ -31,7 +32,6 @@ A Codeforces Contest List response JSON example:
   async GetContestList () {
     this.CacheContestList = await httpGET("https://codeforces.com/api/contest.list");
     if (this.CacheContestList === undefined || this.CacheContestList.status != "OK") {
-      console.log(this.CacheContestList, this.CacheContestList != undefined);
       this.LogError("Get Codeforces contest list failed. " + ((this.CacheContestList === undefined) ? ("") : (this.CacheContestList.status)));
       this.LastCCLTime = 0;
       return;
@@ -59,6 +59,14 @@ A Codeforces Contest List response JSON example:
     let NowTime = Date.now();
     if (NowTime - this.LastCCLTime >= 1000 * 60 * 30) {
       await this.GetContestList();
+    }
+  }
+
+  async CodeforcesParser (msg) {
+    if (msg.text().length >= 2) {
+      if (msg.text().substring(0,2) === 'cf') {
+        this.ReplyUpcomingContest(msg);
+      }
     }
   }
 }

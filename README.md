@@ -6,8 +6,8 @@
 
 - [x] ~~Wrapper applications class `App` and make `CodeforcesRecentContest` as an `App` Class (`App: Codeforces`).~~
 - [ ] Storage the received message throught database.
-- [ ] Set timed events (e.g. Codeforces contest list updating).
-- [ ] Generate wordcloud according to the statistic on the message (`App: WordCloud`).
+- [x] ~~Set timed events (e.g. Codeforces contest list updating).~~
+- [x] ~~Generate wordcloud according to the statistic on the message (`App: WordCloud`).~~
 - [ ] Game: 1A2B (`App: Game_1A2B`).
 - [ ] Game: Daily Wordle (`App: Game_Wordle`).
 - [ ] Codeforces random daily problem (`App: Codeforces: Dailypro`).
@@ -26,7 +26,22 @@
 - `WechatyPuppet` is what puppet you are using. For more details, see [Wechaty Puppet Providers](https://wechaty.js.org/docs/puppet-providers/).
 - `WechatyPuppetToken` is your puppet token. If your puppet don't need token, you needn't change it.
 
-4. Run `npm run start` to start bot.
+4. Python and PIP are required. Run `pip install jieba wordcloud` to install dependencies.
+
+5. Download upgit from [here](https://github.com/pluveto/upgit/releases) according to your operator system. Rename it to upgit (For Windows users, `upgit.exe`), save it to somewhere you like. To access it from anywhere, add its directory to the PATH environment variable. You may create `config.toml` in the same directory of upgit, and fill it in following [this sample config file](https://github.com/pluveto/upgit/blob/main/config.sample.toml). Here is a simplist sample config file:
+
+```toml
+rename = "{year}/{month}/upgit_{year}{month}{day}_{unix_ts}{ext}"
+[uploaders.github]
+pat = "ghp_XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+repo = "repo-name"
+username = "username"
+```
+
+   You can test if upgit works by running `upgit youe.png`. For more, please visit [upgit](https://github.com/pluveto/upgit).
+
+
+5. Run `npm run start` to start bot.
 
 ## LICENSE
 

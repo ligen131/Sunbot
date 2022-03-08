@@ -3,22 +3,23 @@ import { log } from "wechaty";
 export { App };
 
 class App {
-  constructor (_AppId, _AppName, _InitFunc, _ClockeventFunc) {
+  constructor (_AppId, _AppName) {
     this.AppId = _AppId;
     this.AppName = _AppName;
-    this.InitFunc = _InitFunc;
-    this.ClockeventFunc = _ClockeventFunc;
+    this.InitFunc = undefined;
+    this.ClockeventFunc = undefined;
+    this.ExecuteFunc = undefined;
   }
   LogError (text) {
-    log.error(`In [App:${this.AppName}] ${text}`);
+    log.error(`[App:${this.AppName}] ${text}`);
   }
   LogWarn (text) {
-    log.warn(`In [App:${this.AppName}] ${text}`);
+    log.warn(`[App:${this.AppName}] ${text}`);
   }
   LogInfo (text) {
-    log.info(`In [App:${this.AppName}] ${text}`);
+    log.info(`[App:${this.AppName}] ${text}`);
   }
   LogDebug (text) {
-    log.debug(`In [App:${this.AppName}] ${text}`);
+    log.debug(`[App:${this.AppName}] ${text}`);
   }
 }

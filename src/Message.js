@@ -1,38 +1,20 @@
 
-import {
-    log,
-} from 'wechaty';
+import { log } from 'wechaty';
 
-import {
-  AppCodeforces,
-  ContactAdmin,
-  Sun_bot,
- } from './main.js';
+import { AppCodeforces, AppWordcloud } from './main.js';
 
-import {
-  Reply,
-  Send,
-} from './Send.js';
+import { Reply } from './Send.js';
 
-import fs from 'fs';
-
-export {
-  SunMessage,
-};
-
-// async function MessageStorage ()
+export { SunMessage };
 
 async function SunMessage (msg) {
-  log.info(Sun_bot.name(), msg.toString());
-
   if (msg.text() === 'ding') {
-    Send(msg, "dong");
+    Reply(msg, "dong");
   }
-  if (msg.text().length >= 2) {
-    if (msg.text().substring(0,2) === 'cf') {
-      AppCodeforces.ReplyUpcomingContest(msg);
-    }
-  }
+
+  AppCodeforces.ExecuteFunc(msg);
+  AppWordcloud.ExecuteFunc(msg);
+
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;
   var mss = "From: " + msgfrom + '(' + msgfromid + ')\n';
@@ -41,6 +23,7 @@ async function SunMessage (msg) {
     var msgroomid = await msg.room().id;
     mss += "Room: " + msgroom + '(' + msgroomid + ')\n';
   }
+  mss += "Time: " + await msg.date() + '\n';
   mss += '----------------------------------------\n' + msg.text() + '\n----------------------------------------';
-  await Send(ContactAdmin, mss, true);
+  log.info(mss);
 }

@@ -20,9 +20,9 @@ var LastSendTime;
 var MessageLock;
 
 async function SendPrivateMessage (send, text) {
-  let Receiver = send.name();
+  let Receiver = send?.name();
   log.info(Sun_bot.name(), 'Send to %s:\n----------------------------------------\n%s\n----------------------------------------\n', Receiver, text);
-  await send.say(text);
+  await send?.say(text);
 }
 
 async function SendRoomMessage (send, text) {
