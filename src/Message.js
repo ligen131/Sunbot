@@ -1,7 +1,7 @@
 
 import { log } from 'wechaty';
 
-import { AppCodeforces, AppWordcloud } from './main.js';
+import { AppCodeforces, AppGame_1A2B, AppWordcloud } from './main.js';
 
 import { Reply } from './Send.js';
 
@@ -14,6 +14,7 @@ async function SunMessage (msg) {
 
   AppCodeforces.ExecuteFunc(msg);
   AppWordcloud.ExecuteFunc(msg);
+  AppGame_1A2B.ExecuteFunc(msg);
 
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;

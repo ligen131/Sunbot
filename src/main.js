@@ -13,14 +13,14 @@ import fs from 'fs';
 
 // import qrcodeTerminal from 'qrcode-terminal'
 
-import { 
-  SunMessage,
- } from './Message.js';
+import { SunMessage } from './Message.js';
+import { Game_1A2B } from './App/Game_1A2B.js';
 
-export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud };
+export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud, AppGame_1A2B };
 var ContactAdmin;
 var AppCodeforces = new Codeforces();
 var AppWordcloud = new Wordcloud();
+var AppGame_1A2B = new Game_1A2B();
 
 function onLogout (user) {
   log.info(Sun_bot.name(), '%s logout', user);
@@ -56,7 +56,8 @@ async function init () {
   if(!dirExist) fs.mkdirSync('data/');
   log.info(`${Sun_bot.name()} started.`);
 
-  await AppCodeforces.InitFunc();
+  AppCodeforces.InitFunc();
+  AppGame_1A2B.InitFunc();
   setInterval(clockEvent, 1000 * 30);
 }
 

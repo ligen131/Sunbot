@@ -8,7 +8,7 @@
 - [ ] Storage the received message throught database.
 - [x] ~~Set timed events (e.g. Codeforces contest list updating).~~
 - [x] ~~Generate wordcloud according to the statistic on the message (`App: WordCloud`).~~
-- [ ] Game: 1A2B (`App: Game_1A2B`).
+- [x] ~~Game: 1A2B (`App: Game_1A2B`).~~
 - [ ] Game: Daily Wordle (`App: Game_Wordle`).
 - [ ] Codeforces random daily problem (`App: Codeforces: Dailypro`).
 - [ ] Student enroll helper for some university in China (`App: Stuenrollhelper`).
@@ -38,7 +38,7 @@ repo = "repo-name"
 username = "username"
 ```
 
-   You can test if upgit works by running `upgit youe.png`. For more, please visit [upgit](https://github.com/pluveto/upgit).
+   You can test if upgit works by running `upgit your.png`. For more, please visit [upgit](https://github.com/pluveto/upgit).
 
 
 5. Run `npm run start` to start bot.
