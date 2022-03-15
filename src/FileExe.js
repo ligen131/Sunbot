@@ -9,6 +9,7 @@ export async function FileAppend(file, text) {
   try {
     file = folder + file;
     fs.appendFileSync(file, text);
+    log.info(`${file} append file ok.`);
   } catch(e) { log.error(e); }
 }
 
@@ -18,6 +19,7 @@ export async function FileWrite(file, text) {
   try {
     file = folder + file;
     fs.writeFileSync(file, text);
+    log.info(`${file} write file ok.`);
   } catch(e) { log.error(e); }
 }
 
@@ -27,6 +29,7 @@ export async function FileRead(file) {
   if(!fileExist) return undefined;
   try {
     var data = fs.readFileSync(file);
+    log.info(`${file} read file ok.`);
     return data.toString();
   } catch(e) { log.error(e); }
   return undefined;
@@ -37,6 +40,7 @@ export async function FileReadJSON(file) {
   if(undefined == text) return undefined;
   try {
     var obj = await JSON.parse(text);
+    log.info(`${file} read json file ok.`);
     return obj;
   } catch(e) { log.error(e); }
   return undefined;

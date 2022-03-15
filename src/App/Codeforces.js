@@ -30,13 +30,15 @@ A Codeforces Contest List response JSON example:
 }
 */
   async GetContestList () {
-    this.CacheContestList = await httpGET("https://codeforces.com/api/contest.list");
-    if (this.CacheContestList === undefined || this.CacheContestList.status != "OK") {
-      this.LogError("Get Codeforces contest list failed. " + ((this.CacheContestList === undefined) ? ("") : (this.CacheContestList.status)));
-      this.LastCCLTime = 0;
-      return;
-    }
-    this.LastCCLTime = Date.now();
+    try {
+      this.CacheContestList = await httpGET("https://codeforces.com/api/contest.list");
+      if (this.CacheContestList === undefined || this.CacheContestList.status != "OK") {
+        this.LogError("Get Codeforces contest list failed. " + ((this.CacheContestList === undefined) ? ("") : (this.CacheContestList.status)));
+        this.LastCCLTime = 0;
+        return;
+      }
+      this.LastCCLTime = Date.now();
+    } catch(e) { this.LogError(e); }
   }
 
   async ReplyUpcomingContest (msg) {

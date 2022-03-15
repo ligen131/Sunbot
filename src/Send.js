@@ -5,6 +5,7 @@ import {
 import {
   Sun_bot,
  } from './main.js';
+import { isRoom } from './Message.js';
 
 export {
   Send,
@@ -20,14 +21,14 @@ var LastSendTime;
 var MessageLock;
 
 async function SendPrivateMessage (send, text) {
-  let Receiver = send?.name();
-  log.info(Sun_bot.name(), 'Send to %s:\n----------------------------------------\n%s\n----------------------------------------\n', Receiver, text);
+  let Receiver = await send?.name();
+  log.info(Sun_bot.name(), `sent to ${Receiver}:\n----------------------------------------\n${text}\n----------------------------------------\n`);
   await send?.say(text);
 }
 
 async function SendRoomMessage (send, text) {
-  let Receiver = send.topic();
-  log.info(Sun_bot.name(), 'Send to %s:\n----------------------------------------\n%s\n----------------------------------------\n', Receiver, text);
+  let Receiver = await send.topic();
+  log.info(Sun_bot.name(), `sent to ${Receiver}:\n----------------------------------------\n${text}\n----------------------------------------\n`);
   await send.say(text);
 }
 
@@ -48,7 +49,7 @@ async function Send (send, text, isPrivate) {
 }
 
 async function Reply(msg, text) {
-  if (null == msg.room())
+  if (!isRoom(msg))
     await Send(msg.talker(), text, true);
   else await Send(msg.room(), text, false);
 }

@@ -5,6 +5,8 @@ import sys
 import jieba
 from wordcloud import WordCloud, STOPWORDS
 
+ExcludeWord = ['我', '你', '了', '的', '是', '吧', '吗', '在', '不', '都', '就', '没', '有', '也']
+
 def word_segment(text):
   jieba_word = jieba.cut(text, cut_all = False)
   seg_list = ' '.join(jieba_word)
@@ -22,6 +24,7 @@ def generate_wordcloud(text):
       #    mask = alice_mask,
           stopwords = stopwords,
           font_path = font_path,
+          repeat = False,
                 )
 
   wc.generate(text)
@@ -32,5 +35,7 @@ if __name__=='__main__':
 
   _file = sys.argv[1]
   text = open(_file, encoding = 'UTF8').read()
+  for x in ExcludeWord:
+    text = text.replace(x, " ")
   text = word_segment(text)
   generate_wordcloud(text)

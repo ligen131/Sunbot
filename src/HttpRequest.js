@@ -12,9 +12,11 @@ async function _httpGET (url, func) {
 
   xmlhttp.onreadystatechange = function(){
     if (xmlhttp.readyState === 4 && xmlhttp.status === 200) {
-      log.info(Sun_bot.name(), "HttpGet URL: %s OK.", url);
-      var obj = JSON.parse(xmlhttp.responseText);
-      func(obj);
+      try {
+        log.info(Sun_bot.name(), "HttpGet URL: %s OK.", url);
+        var obj = JSON.parse(xmlhttp.responseText);
+        func(obj);
+      } catch (e) { log.error('[HttpRequest]',e); }
     }
   }
   xmlhttp.open("GET", url, true);

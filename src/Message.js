@@ -5,7 +5,12 @@ import { AppCodeforces, AppGame_1A2B, AppWordcloud } from './main.js';
 
 import { Reply } from './Send.js';
 
-export { SunMessage };
+export { SunMessage, isRoom };
+
+async function isRoom (msg) {
+  if (null == msg.room()) return false;
+  return true;
+}
 
 async function SunMessage (msg) {
   if (msg.text() === 'ding') {
@@ -19,7 +24,7 @@ async function SunMessage (msg) {
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;
   var mss = "From: " + msgfrom + '(' + msgfromid + ')\n';
-  if (null == msg.to()) {
+  if (isRoom(msg)) {
     var msgroom = await msg.room().topic();
     var msgroomid = await msg.room().id;
     mss += "Room: " + msgroom + '(' + msgroomid + ')\n';
