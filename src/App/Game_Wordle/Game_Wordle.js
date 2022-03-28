@@ -51,11 +51,12 @@ class Game_Wordle extends App {
   }
 
   async GetTodayWord (msg) {
-    const now = Date.now();
+    const now = Date.now() + 8 * 1000 * 60 * 60;
     const msInDay = 86400000;
     const _roomid = await msg?.room()?.id;
     var roomid = parseInt(_roomid);
     const index = Math.floor(now / msInDay) % WORDS.length * roomid % WORDS.length;
+    this.LogInfo(`In ${_roomid} ${now} ${Math.floor(now / msInDay)} ${index} ${WORDS[index]}`);
     return WORDS[index];
   }
 
@@ -95,7 +96,6 @@ class Game_Wordle extends App {
         }
         roomid = await msg?.room()?.id;
         answer = await this.GetTodayWord(msg);
-        this.LogInfo("The answer is " + answer);
 
         stat_text = "Today Status: \n";
         for (var i in this.GameStat) if (this.GameStat[i].answer === answer && this.GameStat[i].roomid === roomid) {
