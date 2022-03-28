@@ -63,6 +63,7 @@ class Game_1A2B extends App {
     var _fromId = await msg?.talker()?.id;
     var _from = await msg?.talker()?.name();
     var text = await msg?.text();
+    text = await text.toUpperCase();
     var ans = undefined;
     var nowTime = Date.now();
     var nowGameIndex;

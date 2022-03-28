@@ -30,9 +30,10 @@ class Wordcloud extends App {
   }
 
   async AddMessageCache (gmsg) {
+    gmsg.text = ' ' + gmsg.text;
     for (var i in this.MessageCache) {
       if (this.MessageCache[i].room === gmsg.room && this.MessageCache[i].date === gmsg.date) {
-        this.MessageCache[i].text += ' ' + gmsg.text;
+        this.MessageCache[i].text += gmsg.text;
         return;
       }
     }
@@ -49,7 +50,7 @@ class Wordcloud extends App {
   }
 
   async ReplyWordcloud (msg) {
-    if (!isRoom(msg)) {
+    if (!await isRoom(msg)) {
       Reply(msg, "Wordcloud is only available in a room.");
       return;
     }
@@ -84,7 +85,7 @@ class Wordcloud extends App {
         this.ReplyWordcloud(msg);
       }
     }
-    if (isRoom(msg) && await msg.type() === Sun_bot.Message.Type.Text) {
+    if (await isRoom(msg) && await msg.type() === Sun_bot.Message.Type.Text) {
       var roomid = await msg.room().id;
       var date = await msg.date();
       var _month = date.getMonth() + 1;

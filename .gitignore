@@ -78,3 +78,5 @@ log
 .env
 .env.*
 data/
+
+src/config.js

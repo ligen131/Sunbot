@@ -1,14 +1,13 @@
 
 import { log } from 'wechaty';
-
-import { AppCodeforces, AppGame_1A2B, AppWordcloud } from './main.js';
+import { AppCodeforces, AppGame_1A2B, AppGame_Wordle, AppWordcloud } from './main.js';
 
 import { Reply } from './Send.js';
 
 export { SunMessage, isRoom };
 
 async function isRoom (msg) {
-  if (null == msg.room()) return false;
+  if (undefined == await msg.room()) return false;
   return true;
 }
 
@@ -20,11 +19,12 @@ async function SunMessage (msg) {
   AppCodeforces.ExecuteFunc(msg);
   AppWordcloud.ExecuteFunc(msg);
   AppGame_1A2B.ExecuteFunc(msg);
+  AppGame_Wordle.ExecuteFunc(msg);
 
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;
   var mss = "From: " + msgfrom + '(' + msgfromid + ')\n';
-  if (isRoom(msg)) {
+  if (await isRoom(msg)) {
     var msgroom = await msg.room().topic();
     var msgroomid = await msg.room().id;
     mss += "Room: " + msgroom + '(' + msgroomid + ')\n';

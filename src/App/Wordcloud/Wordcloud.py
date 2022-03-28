@@ -5,7 +5,7 @@ import sys
 import jieba
 from wordcloud import WordCloud, STOPWORDS
 
-ExcludeWord = ['我', '你', '了', '的', '是', '吧', '吗', '在', '不', '都', '就', '没', '有', '也']
+ExcludeWord = ['我', '你', '了', '的', '是', '吧', '吗', '在', '不', '都', '就', '没', '有', '也', '又', '他', '她', '们']
 
 def word_segment(text):
   jieba_word = jieba.cut(text, cut_all = False)

@@ -49,7 +49,7 @@ async function Send (send, text, isPrivate) {
 }
 
 async function Reply(msg, text) {
-  if (!isRoom(msg))
+  if (!await isRoom(msg))
     await Send(msg.talker(), text, true);
   else await Send(msg.room(), text, false);
 }

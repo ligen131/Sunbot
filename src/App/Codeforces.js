@@ -65,8 +65,9 @@ A Codeforces Contest List response JSON example:
   }
 
   async CodeforcesParser (msg) {
-    if (msg.text().length >= 2) {
-      if (msg.text().substring(0,2) === 'cf') {
+    var text = await msg.text();
+    if (text.length >= 2) {
+      if (text.substring(0,2) === 'cf') {
         this.ReplyUpcomingContest(msg);
       }
     }
