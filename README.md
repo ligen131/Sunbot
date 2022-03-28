@@ -9,8 +9,10 @@
 2. Wordcloud application. Send `wordcloud` in a group. It will generate a word cloud which included words sent in this group.
 
 3. 1A2B Game. Send `1A2B` to it to start a game. Rule: When a game start, bot will generate a string. Your goal is to guess it. Every time you can send a 4-letter string containing numbers and upper case English letters. If there is an correct character in the right place, you will get an A. If there is an correct character but it isn't in the right place, you will get an B. Bot will reply you as `XAXB` to show how many As and Bs you got. For example, if the answer is `1A2B` and you guess `A32B`, you will get `2A1B`.
+   
+4. Wordle Game. Every day has a different word and one people can guess only one time per day. For common wordle rule, please visit [https://wd.ligen131.com](https://wd.ligen131.com). Send `wordle` to check today status.
 
-4. [Codeforces](http://codeforces.com/) recent contest querier. Send `cf` to it and you will got the list of upcoming codeforces contests.
+5. [Codeforces](http://codeforces.com/) recent contest querier. Send `cf` to it and you will got the list of upcoming codeforces contests.
 
 ## How to run the bot
 
@@ -51,7 +53,7 @@ username = "username"
 - [x] ~~Set timed events (e.g. Codeforces contest list updating).~~
 - [x] ~~Generate wordcloud according to the statistic on the message (`App: WordCloud`).~~
 - [x] ~~Game: 1A2B (`App: Game_1A2B`).~~
-- [ ] Game: Daily Wordle (`App: Game_Wordle`).
+- [x] ~~Game: Daily Wordle (`App: Game_Wordle`).~~
 - [ ] Codeforces random daily problem (`App: Codeforces: Dailypro`).
 - [ ] Student enroll helper for some university in China (`App: Stuenrollhelper`).
 - [ ] Make a command parser to parse every message which is probably a command.
