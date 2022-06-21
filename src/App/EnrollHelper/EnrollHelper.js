@@ -132,9 +132,8 @@ class EnrollHelper extends App {
       } else if (rep.type === "text") {
         content = rep.content;
       }
-      // if (is_Room_Class) await Send(msg, content, false);
-      // else await Reply(msg, content);
-      await SendRoomMessage(msg, content);
+      if (is_Room_Class) await SendRoomMessage(msg, content);
+      else await SendRoomMessage(await msg.room(), content);
     });
   }
 
