@@ -21,10 +21,6 @@ class EnrollHelper_EnrollRoom {
 
 const EnrollHelperClockTime = [
   {
-    h: 21,
-    min: 29,
-  },
-  {
     h: 10,
     min: 0,
   },
