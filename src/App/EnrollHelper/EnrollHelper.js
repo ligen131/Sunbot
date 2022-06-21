@@ -2,7 +2,7 @@ import { FileBox } from "file-box";
 import { ADMIN_WXID } from "../../config.js";
 import { FileReadJSON, FileWriteJSON } from "../../FileExe.js";
 import { isRoom } from "../../Message.js";
-import { Reply, Send } from "../../Send.js";
+import { Reply, Send, SendRoomMessage } from "../../Send.js";
 import { App } from "../App.js";
 import { EnrollAskWord, EnrollReply, EnrollWord } from "./EnrollWords.js";
 import { Sun_bot } from "../../main.js";
@@ -132,8 +132,9 @@ class EnrollHelper extends App {
       } else if (rep.type === "text") {
         content = rep.content;
       }
-      if (is_Room_Class) await Send(msg, content, false);
-      else await Reply(msg, content);
+      // if (is_Room_Class) await Send(msg, content, false);
+      // else await Reply(msg, content);
+      await SendRoomMessage(msg, content);
     });
   }
 

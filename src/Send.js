@@ -10,6 +10,7 @@ import { isRoom } from './Message.js';
 export {
   Send,
   Reply,
+  SendRoomMessage,
 };
 
 import { 
