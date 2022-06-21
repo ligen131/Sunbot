@@ -128,7 +128,7 @@ class EnrollHelper extends App {
     var content;
     obj.forEach(async (rep) => {
       if (rep.type === "url") {
-        content = this.imgArray[rep?.img_index];
+        content = FileBox.fromUrl(rep.content);
       } else if (rep.type === "text") {
         content = rep.content;
       }
