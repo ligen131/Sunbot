@@ -44,7 +44,7 @@ class Game_Wordle extends App {
   }
 
   async GameStatRead () {
-    this.GameStat = await FileReadJSON(this.GameStorageFile, this.GameStorageFile);
+    this.GameStat = await FileReadJSON(this.GameStorageFile);
     if (undefined == this.GameStat) {
       this.GameStat = new Array();
     }

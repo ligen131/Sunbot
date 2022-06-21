@@ -16,13 +16,15 @@ import fs from 'fs';
 import { SunMessage } from './Message.js';
 import { Game_1A2B } from './App/Game_1A2B.js';
 import { Game_Wordle } from './App/Game_Wordle/Game_Wordle.js';
+import { EnrollHelper } from './App/EnrollHelper/EnrollHelper.js';
 
-export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud, AppGame_1A2B, AppGame_Wordle };
+export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud, AppGame_1A2B, AppGame_Wordle, AppEnrollHelper };
 var ContactAdmin;
 var AppCodeforces = new Codeforces();
 var AppWordcloud = new Wordcloud();
 var AppGame_1A2B = new Game_1A2B();
 var AppGame_Wordle = new Game_Wordle();
+var AppEnrollHelper = new EnrollHelper();
 
 var Sun_bot;
 
@@ -53,6 +55,7 @@ async function clockEvent () {
   log.info(`Clock Event started.`);
   AppCodeforces.ClockeventFunc();
   AppWordcloud.ClockeventFunc();
+  AppEnrollHelper.ClockeventFunc();
 }
 
 async function init () {
@@ -63,6 +66,7 @@ async function init () {
   AppCodeforces.InitFunc();
   AppGame_1A2B.InitFunc();
   AppGame_Wordle.InitFunc();
+  AppEnrollHelper.InitFunc();
   setInterval(clockEvent, 1000 * 30);
 }
 
