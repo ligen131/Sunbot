@@ -30,7 +30,8 @@ export const EnrollReply = [
     reply: [
       {
         type: "text",
-        content: `您好！华科招生小机器人为您服务!
+        content: `您好！华科招生机器人为您服务!
+
 华中科技大学 2022 年在广东省计划共招收 221 人，其中历史类 202 组 27 人，物理类 204 组 153 人，203 组 9 人，207 组 20 人，高校专项 1 人，艺术类 11 人。其中 203 组与 207 组需再选生物或化学。
 去年（2021 年）最各组别最低分数 / 位次为：历史类 202 组 614/1548 ，物理类 204 组 641/4967 ，203 组 653/2585 ，207 组 620/12381 。
 欢迎大家报考华中科技大学！
@@ -38,7 +39,7 @@ export const EnrollReply = [
       },
       {
         type: "url",
-        content: `https://s2.loli.net/2022/06/21/EYuHrmGtojOfL6x.jpg`,
+        content: `https://pan.ligen131.com/api/v3/file/get/11/hustqrcode.jpg?sign=PFdkUCg4EBidHhFnb0D17II7n_ciBoKdmp4R4C_BiQw%3D%3A0`,
         img_index: 0,
       },
 //       {

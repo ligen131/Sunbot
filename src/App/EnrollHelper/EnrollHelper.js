@@ -112,7 +112,7 @@ class EnrollHelper extends App {
     if (!upd) this.EnrollRoom.push(new EnrollHelper_EnrollRoom(room, cmd[2], allowRep, allowCE));
     await this.EnrollRoomUpdate();
     if (cmd[1] == "set") {
-      await Reply(msg, `OK. Successfully set "${cmd[2]}" in this group.`);
+      await Reply(msg, `OK!`);
       EnrollReply.forEach(async (obj) => {
         if (obj.university == cmd[2]) {
           await this.EnrollHelperSend(obj.reply, msg);
@@ -125,15 +125,18 @@ class EnrollHelper extends App {
   }
 
   async EnrollHelperSend(obj, msg, is_Room_Class) {
-    var content;
     obj.forEach(async (rep) => {
-      if (rep.type === "url") {
-        content = FileBox.fromUrl(rep.content);
-      } else if (rep.type === "text") {
-        content = rep.content;
+      var cnt;
+      if (rep.type == "url") {
+        cnt = this.imgArray[rep?.img_index];
+      } else if (rep.type == "text") {
+        cnt = rep.content;
       }
-      if (is_Room_Class) await SendRoomMessage(msg, content);
-      else await SendRoomMessage(await msg.room(), content);
+      if (is_Room_Class) {
+        await SendRoomMessage(msg, cnt);
+      } else {
+        await SendRoomMessage(await msg.room(), cnt);
+      }
     });
   }
 
