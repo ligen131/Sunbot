@@ -1,3 +1,22 @@
+export const EnrollBlock = [
+  `刘华北`,
+  `Meluan`,
+  `孤街`,
+  `陳賢坤`,
+  `阿`,
+  `LiP`,
+  `Andrew Taggart`,
+  `Allen`,
+  `一缕风`,
+  `郭纪凡`,
+  `一瓶2，4-D`,
+  `蜩与学鸠`,
+  `呀! 鸦、`,
+  `迪迦贝贝`,
+  `黄丹极`,
+  `彭洋_HUST`,
+  `夏冬辉`,
+];
 export const EnrollWord = [
   `计划`,
   `分数`,
@@ -10,13 +29,8 @@ export const EnrollAskWord = [
   `请问`,
   `吗`,
   `呢`,
-  `?`,
-  `？`,
-  `咨询`,
-  `询问`,
   `问`,
   `多少`,
-  `几何`,
 ];
 export const EnrollReply = [
   {

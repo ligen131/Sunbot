@@ -4,7 +4,7 @@ import { FileReadJSON, FileWriteJSON } from "../../FileExe.js";
 import { isRoom } from "../../Message.js";
 import { Reply, Send, SendRoomMessage } from "../../Send.js";
 import { App } from "../App.js";
-import { EnrollAskWord, EnrollReply, EnrollWord } from "./EnrollWords.js";
+import { EnrollAskWord, EnrollBlock, EnrollReply, EnrollWord } from "./EnrollWords.js";
 import { Sun_bot } from "../../main.js";
 
 export { EnrollHelper };
@@ -128,6 +128,13 @@ class EnrollHelper extends App {
     obj.forEach(async (rep) => {
       var cnt;
       if (rep.type == "url") {
+        var FailedTrial = 0;
+        var img;
+        for (img = undefined; !img && FailedTrial <= 10; ++FailedTrial) try {
+          img = FileBox.fromUrl(rep.content);
+        } catch (e) { err = e; }
+        if (!img) throw new Error(`[EnrollHelper] Failed to load ${obj.university}.${rep?.img_index} img. url = ${rep.content}, error = ${err}.`);
+        this.imgArray[rep?.img_index] = img;
         cnt = this.imgArray[rep?.img_index];
       } else if (rep.type == "text") {
         cnt = rep.content;
@@ -143,6 +150,12 @@ class EnrollHelper extends App {
   async EnrollHelperFunc(msg) {
     if (await this.EnrollHelperControl(msg)) return;
     if (!await isRoom(msg)) return;
+    var is_block = false;
+    var talker = await msg?.talker()?.name();
+    EnrollBlock.forEach((val) => {
+      if (val == talker) is_block = true;
+    });
+    if (is_block) return;
     var text = await msg.text();
     var room = await msg?.room().id;
     var ok1 = false, ok2 = false, ok3;
