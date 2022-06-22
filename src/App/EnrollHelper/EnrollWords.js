@@ -53,7 +53,8 @@ export const EnrollReply = [
       },
       {
         type: "url",
-        content: `https://pan.ligen131.com/api/v3/file/get/11/hustqrcode.jpg?sign=PFdkUCg4EBidHhFnb0D17II7n_ciBoKdmp4R4C_BiQw%3D%3A0`,
+//         content: `https://pan.ligen131.com/api/v3/file/get/11/hustqrcode.jpg?sign=PFdkUCg4EBidHhFnb0D17II7n_ciBoKdmp4R4C_BiQw%3D%3A0`,
+        content: `https://s2.loli.net/2022/06/21/EYuHrmGtojOfL6x.jpg`,
         img_index: 0,
       },
 //       {
