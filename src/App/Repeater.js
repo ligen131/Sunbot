@@ -28,7 +28,7 @@ class Repeater extends App {
     var roomid = await msg.room().id;
     var text = await msg.text();
     var ok = false;
-    this.CacheWord.forEach((obj, ind) => {
+    this.CacheWord.forEach(async (obj, ind) => {
       if (obj.roomid == roomid) {
         ok = true;
         if (obj.text == text) this.CacheWord[ind].RepeatNum++;
