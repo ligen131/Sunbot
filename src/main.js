@@ -17,14 +17,25 @@ import { SunMessage } from './Message.js';
 import { Game_1A2B } from './App/Game_1A2B.js';
 import { Game_Wordle } from './App/Game_Wordle/Game_Wordle.js';
 import { EnrollHelper } from './App/EnrollHelper/EnrollHelper.js';
+import { Repeater } from './App/Repeater.js';
 
-export { Sun_bot, ContactAdmin, AppCodeforces, AppWordcloud, AppGame_1A2B, AppGame_Wordle, AppEnrollHelper };
+export { 
+  Sun_bot,
+  ContactAdmin,
+  AppCodeforces,
+  AppWordcloud,
+  AppGame_1A2B,
+  AppGame_Wordle,
+  AppEnrollHelper,
+  AppRepeater,
+};
 var ContactAdmin;
 var AppCodeforces = new Codeforces();
 var AppWordcloud = new Wordcloud();
 var AppGame_1A2B = new Game_1A2B();
 var AppGame_Wordle = new Game_Wordle();
 var AppEnrollHelper = new EnrollHelper();
+var AppRepeater = new Repeater();
 
 var Sun_bot;
 

@@ -1,7 +1,12 @@
-
-import { FileBox } from 'file-box';
 import { log } from 'wechaty';
-import { AppCodeforces, AppEnrollHelper, AppGame_1A2B, AppGame_Wordle, AppWordcloud } from './main.js';
+import {
+  AppCodeforces,
+  AppEnrollHelper,
+  AppGame_1A2B,
+  AppGame_Wordle,
+  AppRepeater,
+  AppWordcloud
+} from './main.js';
 
 import { Reply } from './Send.js';
 
@@ -24,6 +29,7 @@ async function SunMessage (msg) {
   AppGame_1A2B.ExecuteFunc(msg);
   AppGame_Wordle.ExecuteFunc(msg);
   AppEnrollHelper.ExecuteFunc(msg);
+  AppRepeater.ExecuteFunc(msg);
 
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;
