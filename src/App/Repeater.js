@@ -43,7 +43,7 @@ class Repeater extends App {
       }
     })
     if (!ok) {
-      this.CacheWord.push(Repeater_CacheWord(roomid, text, 1));
+      this.CacheWord.push(new Repeater_CacheWord(roomid, text, 1));
     }
   }
 
