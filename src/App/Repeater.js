@@ -41,10 +41,10 @@ class Repeater extends App {
           await Reply(msg, text);
         }
       }
-      if (!ok) {
-        this.CacheWord.push(Repeater_CacheWord(roomid, text, 1));
-      }
     })
+    if (!ok) {
+      this.CacheWord.push(Repeater_CacheWord(roomid, text, 1));
+    }
   }
 
 }
