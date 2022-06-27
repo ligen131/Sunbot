@@ -1,3 +1,4 @@
+import { Sun_bot } from "../main.js";
 import { isRoom } from "../Message.js";
 import { Reply } from "../Send.js";
 import { App } from "./App.js";
@@ -31,6 +32,10 @@ class Repeater extends App {
     this.CacheWord.forEach(async (obj, ind) => {
       if (obj.roomid == roomid) {
         ok = true;
+        if (await msg.type() != Sun_bot.Message.Type.Text) {
+          this.CacheWord[ind].RepeatNum = 0;
+          return;
+        }
         if (obj.text == text) this.CacheWord[ind].RepeatNum++;
         else {
           this.CacheWord[ind].RepeatNum = 1;
@@ -42,7 +47,7 @@ class Repeater extends App {
         }
       }
     })
-    if (!ok) {
+    if (!ok && msg.type() === Sun_bot.Message.Type.Text) {
       this.CacheWord.push(new Repeater_CacheWord(roomid, text, 1));
     }
   }
