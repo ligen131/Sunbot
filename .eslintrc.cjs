@@ -1,6 +1,6 @@
 module.exports = {
     "env": {
-        "commonjs": true,
+        "commonjs": false,
         "es2021": true,
         "node": true
     },
@@ -18,5 +18,6 @@ module.exports = {
         "@typescript-eslint"
     ],
     "rules": {
+        "@typescript-eslint/no-explicit-any": "off"
     }
 }
