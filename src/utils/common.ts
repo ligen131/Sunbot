@@ -19,10 +19,10 @@
  */
 'use strict';
 
-import { Sunbot } from './BotStarter/BotStarter';
+import { Message } from 'wechaty';
 
-function main() {
-	Sunbot.start();
+export { IsRoomMessage };
+
+async function IsRoomMessage(message: Message): Promise<boolean> {
+	return undefined === message.room();
 }
-
-main();

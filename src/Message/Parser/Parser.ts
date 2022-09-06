@@ -19,10 +19,28 @@
  */
 'use strict';
 
-import { Sunbot } from './BotStarter/BotStarter';
+import { Message } from 'wechaty';
 
-function main() {
-	Sunbot.start();
+export { IMessage, Parser };
+
+interface IMessage {
+	message: Message;
+	count: number;
+	list: string[];
 }
 
-main();
+async function Parser(message: Message): Promise<IMessage> {
+	let text: string = message.text();
+	text = text.toLowerCase();
+	text = text.replace(/\r/g, ' ');
+	text = text.replace(/\n/g, ' ');
+	let list = text.split(' ');
+	list = list.filter((value) => {
+		return value && value.trim();
+	});
+	return {
+		message: message,
+		count: list.length,
+		list: list,
+	} as IMessage;
+}

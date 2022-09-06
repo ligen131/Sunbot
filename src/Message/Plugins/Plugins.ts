@@ -19,10 +19,11 @@
  */
 'use strict';
 
-import { Sunbot } from './BotStarter/BotStarter';
-
-function main() {
-	Sunbot.start();
-}
-
-main();
+// interface IPlugins {
+//   plugin_name: string;
+//   plugin_id: number;
+//   plugin_helplist_short: string;
+//   plugin_helplist_long: string;
+//   is_database_used: boolean;
+//   func(): void;
+// }

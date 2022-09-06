@@ -105,3 +105,5 @@ dist
 
 # vsCode tmp file
 $LocalAppData%
+
+template.ts

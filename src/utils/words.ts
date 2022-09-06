@@ -19,10 +19,4 @@
  */
 'use strict';
 
-import { Sunbot } from './BotStarter/BotStarter';
-
-function main() {
-	Sunbot.start();
-}
-
-main();
+export const PLUGIN_DINGDONG_HELPLIST_SHORT = ``;
