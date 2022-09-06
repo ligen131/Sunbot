@@ -23,6 +23,8 @@ import { OnMessage } from '../Message/OnMessage';
 import { LogError, LogInfo } from '../utils/logs';
 import { Contact, WechatyBuilder } from 'wechaty';
 import { WechatyInterface } from 'wechaty/impls';
+import type { GError } from 'gerror';
+import { PluginHeartBeat, PluginRegister } from '../Message/Plugins/Plugins';
 
 export { Bot, Sunbot };
 
@@ -40,15 +42,22 @@ class Bot {
 
 	private onLogin(user: Contact): void {
 		LogInfo(this, `Bot ${user.name()} login.`);
+		PluginRegister();
 	}
 
 	private onLogout(user: Contact): void {
 		LogInfo(this, `Bot ${user.name()} logout.`);
 	}
 
+	private onError(err: GError): void {
+		LogError(this, err);
+	}
+
 	public start(): void {
 		this.bot.on('login', this.onLogin);
 		this.bot.on('logout', this.onLogout);
+		this.bot.on('error', this.onError);
+		this.bot.on('heartbeat', PluginHeartBeat);
 		this.bot.on('message', OnMessage);
 
 		this.bot

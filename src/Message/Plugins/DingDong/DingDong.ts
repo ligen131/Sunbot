@@ -18,3 +18,49 @@
  *
  */
 'use strict';
+
+import { IMessage } from '../../Parser/Parser';
+import { Send } from '../../SendMessage';
+import {
+	PLUGIN_DINGDONG_HELPLIST_LONG,
+	PLUGIN_DINGDONG_HELPLIST_SHORT,
+} from '../../../utils/words';
+import { IPlugins } from '../Plugins';
+
+export { PluginDingDong };
+
+class PluginDingDong implements IPlugins {
+	plugin_name = 'ding-dong';
+	plugin_id = 1;
+	plugin_helplist_short: string = PLUGIN_DINGDONG_HELPLIST_SHORT;
+	plugin_helplist_long: string = PLUGIN_DINGDONG_HELPLIST_LONG;
+	is_database_used = false;
+	command = `ding`;
+
+	async match(message: IMessage): Promise<boolean> {
+		let ret = false;
+		message.list.forEach(
+			((value: string) => {
+				if (value.indexOf(this.command) >= 0) ret = true;
+			}).bind(this),
+		);
+		return ret;
+	}
+	action(message: IMessage): void {
+		Send(message.message, `dong`);
+	}
+
+	async is_match_private(message: IMessage): Promise<boolean> {
+		return await this.match(message);
+	}
+	private_action(message: IMessage): void {
+		this.action(message);
+	}
+
+	async is_match_room(message: IMessage): Promise<boolean> {
+		return await this.match(message);
+	}
+	room_action(message: IMessage): void {
+		this.action(message);
+	}
+}

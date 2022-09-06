@@ -19,11 +19,69 @@
  */
 'use strict';
 
-// interface IPlugins {
-//   plugin_name: string;
-//   plugin_id: number;
-//   plugin_helplist_short: string;
-//   plugin_helplist_long: string;
-//   is_database_used: boolean;
-//   func(): void;
-// }
+import { Sunbot } from '../../BotStarter/BotStarter';
+import { LogInfo } from '../../utils/logs';
+import { IMessage } from '../Parser/Parser';
+import { PluginDingDong } from './DingDong/DingDong';
+
+export {
+	IPlugins,
+	PluginRegister,
+	PluginHeartBeat,
+	PluginPrivateAction,
+	PluginRoomAction,
+};
+
+interface IPlugins {
+	plugin_name: string;
+	plugin_id: number;
+	plugin_helplist_short: string;
+	plugin_helplist_long: string;
+	is_database_used: boolean;
+	command: string | string[];
+	register?(): void | Promise<void>;
+	is_match_private(message: IMessage): void | Promise<boolean>;
+	private_action(message: IMessage): void | Promise<void>;
+	is_match_room(message: IMessage): boolean | Promise<boolean>;
+	room_action(message: IMessage): void | Promise<void>;
+	heart_beat_action?(): void | Promise<void>;
+}
+
+let Plugins: IPlugins[];
+
+async function PluginRegister(): Promise<void> {
+	LogInfo(Sunbot, `Start to register plugins.`);
+	Plugins = [new PluginDingDong()];
+	Plugins.forEach((plugin) => {
+		if (plugin.register) {
+			plugin?.register();
+		}
+	});
+}
+
+function PluginHeartBeat(): void {
+	if (!Plugins) return;
+	Plugins.forEach((plugin) => {
+		if (plugin.heart_beat_action) {
+			plugin.heart_beat_action();
+		}
+	});
+}
+
+function PluginPrivateAction(message: IMessage): void {
+	if (!Plugins) return;
+	Plugins.forEach(async (plugin) => {
+		if (await plugin.is_match_private(message)) {
+			plugin.private_action(message);
+		}
+	});
+}
+
+function PluginRoomAction(message: IMessage): void {
+	if (!Plugins) return;
+	Plugins.forEach(async (plugin) => {
+		if (await plugin.is_match_room(message)) {
+			plugin.room_action(message);
+		}
+	});
+}

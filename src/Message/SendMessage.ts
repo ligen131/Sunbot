@@ -19,8 +19,19 @@
  */
 'use strict';
 
-export const PLUGIN_DINGDONG_HELPLIST_SHORT = `ding  -  监测 bot 状态`;
-export const PLUGIN_DINGDONG_HELPLIST_LONG = `ding
-在 bot 状态正常运行下，会默认回复 dong。
-  -h, -H  打开该帮助列表
-`;
+import { Sunbot } from '../BotStarter/BotStarter';
+import { LogInfo } from '../utils/logs';
+import { Contact, Message } from 'wechaty';
+
+export { Send };
+
+async function Send(tmp: Contact | Message, text: string) {
+	LogInfo(
+		Sunbot,
+		`
+======================== Send ========================
+${text}
+======================================================`,
+	);
+	tmp.say(text);
+}

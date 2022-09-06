@@ -24,6 +24,7 @@ import { Message } from 'wechaty';
 import { Sunbot } from '../BotStarter/BotStarter';
 import { LogInfo } from '../utils/logs';
 import { IMessage, Parser } from './Parser/Parser';
+import { PluginPrivateAction, PluginRoomAction } from './Plugins/Plugins';
 
 export { OnMessage };
 
@@ -48,4 +49,10 @@ ${message_list.list}
 =======================================================
 `,
 	);
+
+	if (isRoom) {
+		PluginRoomAction(message_list);
+	} else {
+		PluginPrivateAction(message_list);
+	}
 }
