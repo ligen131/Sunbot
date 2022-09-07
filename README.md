@@ -2,6 +2,10 @@
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
 
+**Tips: The `main` branch is deprecated and Sunbot is refactored to [TypeScript](https://www.typescriptlang.org/) in the [`dev` branch](https://github.com/ligen131/Sunbot/tree/dev).**
+
+**WARNING: This project is under development and stability is not guaranteed.**
+
 ## Feature
 
 1. Send `ding` to it. It will reply you `dong`.
