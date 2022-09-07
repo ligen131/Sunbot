@@ -107,3 +107,5 @@ dist
 $LocalAppData%
 
 template.ts
+
+config/config.json

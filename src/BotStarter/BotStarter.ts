@@ -21,11 +21,11 @@
 
 import { OnMessage } from '../Message/OnMessage';
 import { LogError, LogInfo } from '../utils/logs';
-import { Contact, WechatyBuilder } from 'wechaty';
+import { Contact, OfficialPuppetNpmName, WechatyBuilder } from 'wechaty';
 import { WechatyInterface } from 'wechaty/impls';
 import type { GError } from 'gerror';
 import { PluginHeartBeat, PluginRegister } from '../Message/Plugins/Plugins';
-
+import * as Config from '../../config/config.json';
 export { Bot, Sunbot };
 
 class Bot {
@@ -33,6 +33,10 @@ class Bot {
 	public constructor(private _name: string) {
 		this.bot = WechatyBuilder.build({
 			name: _name,
+			puppet: Config.bot.puppet as OfficialPuppetNpmName,
+			puppetOptions: {
+				token: Config.bot.puppetOptions.token,
+			},
 		});
 	}
 

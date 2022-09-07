@@ -1,0 +1,8 @@
+{
+  "bot": {
+    "puppet": "wechaty-puppet-wechat",
+    "puppetOptions": {
+      "token": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
+    }
+  }
+}
