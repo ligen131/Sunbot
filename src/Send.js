@@ -1,6 +1,7 @@
 import {
     log,
 } from 'wechaty';
+import { SENDING_MESSAGE_ENABLE } from './config.js';
 
 import {
   Sun_bot,
@@ -24,12 +25,18 @@ var MessageLock;
 async function SendPrivateMessage (send, text) {
   let Receiver = await send?.name();
   log.info(Sun_bot.name(), `sent to ${Receiver}:\n----------------------------------------\n${text}\n----------------------------------------\n`);
+  if (!SENDING_MESSAGE_ENABLE) {
+    return;
+  }
   await send?.say(text);
 }
 
 async function SendRoomMessage (send, text) {
   let Receiver = await send.topic();
   log.info(Sun_bot.name(), `sent to ${Receiver}:\n----------------------------------------\n${text}\n----------------------------------------\n`);
+  if (!SENDING_MESSAGE_ENABLE) {
+    return;
+  }
   await send.say(text);
 }
 
