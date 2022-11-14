@@ -80,3 +80,4 @@ log
 data/
 
 src/config.js
+%LocalAppData%

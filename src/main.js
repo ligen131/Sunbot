@@ -18,6 +18,7 @@ import { Game_1A2B } from './App/Game_1A2B.js';
 import { Game_Wordle } from './App/Game_Wordle/Game_Wordle.js';
 import { EnrollHelper } from './App/EnrollHelper/EnrollHelper.js';
 import { Repeater } from './App/Repeater.js';
+import { Server } from './status/status.js';
 
 export { 
   Sun_bot,
@@ -79,6 +80,8 @@ async function init () {
   AppGame_Wordle.InitFunc();
   AppEnrollHelper.InitFunc();
   setInterval(clockEvent, 1000 * 30);
+
+  Server();
 }
 
 async function main () {
