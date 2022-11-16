@@ -110,3 +110,5 @@ template.ts
 config/config.json
 src/config.js
 data/
+
+*.memory-card.json
