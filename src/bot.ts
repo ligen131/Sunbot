@@ -19,13 +19,13 @@
  */
 'use strict';
 
-import { OnMessage } from '../Message/OnMessage';
-import { LogError, LogInfo } from '../utils/logs';
+import { OnMessage } from './message/onMessage';
+import { LogError, LogInfo } from './utils/logs';
 import { Contact, OfficialPuppetNpmName, WechatyBuilder } from 'wechaty';
 import { WechatyInterface } from 'wechaty/impls';
 import type { GError } from 'gerror';
-import { PluginHeartBeat, PluginRegister } from '../Message/Plugins/Plugins';
-import * as Config from '../../config/config.json';
+import { PluginHeartBeat, PluginRegister } from './message/plugins/plugins';
+import * as Config from '../config/config.json';
 export { Bot, Sunbot };
 
 class Bot {
@@ -57,7 +57,7 @@ class Bot {
 		LogError(this, err);
 	}
 
-	public start(): void {
+	public Start(): void {
 		this.bot.on('login', this.onLogin);
 		this.bot.on('logout', this.onLogout);
 		this.bot.on('error', this.onError);

@@ -10,6 +10,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\"",
     "start": "npm run check && ts-node src/index.ts",
+    "start-directly": "ts-node src/index.ts",
     "build": "rm -rf dist && npm run check && tsc --build",
     "check": "npm run eslint && npm run prettier",
     "dev:comment": "启动开发环境，允许实时编译",

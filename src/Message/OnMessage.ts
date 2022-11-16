@@ -19,40 +19,38 @@
  */
 'use strict';
 
-import { IsRoomMessage } from '../utils/common';
 import { Message } from 'wechaty';
-import { Sunbot } from '../BotStarter/BotStarter';
+import { Sunbot } from '../bot';
 import { LogInfo } from '../utils/logs';
-import { IMessage, Parser } from './Parser/Parser';
-import { PluginPrivateAction, PluginRoomAction } from './Plugins/Plugins';
+import { IMessage, Parser } from './parser/parser';
+import { PluginPrivateAction, PluginRoomAction } from './plugins/plugins';
 
 export { OnMessage };
 
 async function OnMessage(message: Message): Promise<void> {
 	LogInfo(Sunbot, `Start to deal with message.`);
-	const message_list: IMessage = await Parser(message);
-	const isRoom: boolean = await IsRoomMessage(message);
-	const roomTopic = message.room()?.topic(),
-		roomId = message.room()?.id;
-	const talkerName = message.talker().name(),
-		talkerId = message.talker().id;
-	const time = message.date().toLocaleString();
+	const msg: IMessage = await Parser(message);
+
 	LogInfo(
 		Sunbot,
 		`
 ======================= Message =======================
 ${
-	isRoom ? `Room: ${roomTopic}(${roomId}) ` : ``
-}From: ${talkerName}(${talkerId})
-Time: ${time} List length: ${message_list.count}
-${message_list.list}
+	msg.isRoom
+		? `Room: ${msg.roomTopic}(${msg.roomID})
+`
+		: ``
+}From: ${msg.talker}(${msg.talkerID})
+Time: ${msg.time.toLocaleString()}
+List length: ${msg.count}
+${msg.list}
 =======================================================
 `,
 	);
 
-	if (isRoom) {
-		PluginRoomAction(message_list);
+	if (msg.isRoom) {
+		PluginRoomAction(msg);
 	} else {
-		PluginPrivateAction(message_list);
+		PluginPrivateAction(msg);
 	}
 }

@@ -19,7 +19,7 @@
  */
 'use strict';
 
-import { Bot } from '../BotStarter/BotStarter';
+import { Bot } from '../bot';
 import { log } from 'wechaty';
 
 export { LogDebug, LogInfo, LogWarn, LogError };

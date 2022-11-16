@@ -24,5 +24,5 @@ import { Message } from 'wechaty';
 export { IsRoomMessage };
 
 async function IsRoomMessage(message: Message): Promise<boolean> {
-	return undefined === message.room();
+	return null != message.room();
 }

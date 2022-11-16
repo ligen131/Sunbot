@@ -19,10 +19,10 @@
  */
 'use strict';
 
-import { Sunbot } from '../../BotStarter/BotStarter';
+import { Sunbot } from '../../bot';
 import { LogInfo } from '../../utils/logs';
-import { IMessage } from '../Parser/Parser';
-import { PluginDingDong } from './DingDong/DingDong';
+import { IMessage } from '../parser/parser';
+import { PluginDingDong } from './dingdong/dingdong';
 
 export {
 	IPlugins,

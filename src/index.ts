@@ -19,10 +19,10 @@
  */
 'use strict';
 
-import { Sunbot } from './BotStarter/BotStarter';
+import { Sunbot } from './bot';
 
 function main() {
-	Sunbot.start();
+	Sunbot.Start();
 }
 
 main();

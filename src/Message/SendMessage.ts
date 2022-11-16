@@ -19,19 +19,47 @@
  */
 'use strict';
 
-import { Sunbot } from '../BotStarter/BotStarter';
-import { LogInfo } from '../utils/logs';
-import { Contact, Message } from 'wechaty';
+import { Sunbot } from '../bot';
+import { LogError, LogInfo } from '../utils/logs';
+import { Contact, Room } from 'wechaty';
+import * as Config from '../../config/config.json';
+import { IMessage, InstanceOfIMessage } from './parser/parser';
 
 export { Send };
 
-async function Send(tmp: Contact | Message, text: string) {
+async function Send(tmp: Contact | IMessage, text: string) {
+	let send: Contact | Room | undefined;
+	let roomTopic, roomID, talker, talkerID: string | undefined;
+	let isRoom = false;
+	if (InstanceOfIMessage(tmp)) {
+		if (tmp.isRoom) {
+			send = tmp.message.room();
+			roomTopic = tmp.roomTopic;
+			roomID = tmp.roomID;
+			isRoom = true;
+		} else {
+			send = tmp.message.talker();
+			talker = tmp.talker;
+			talkerID = tmp.talkerID;
+		}
+	} else {
+		send = tmp;
+		talker = tmp.name();
+		talkerID = tmp.id;
+	}
+	const now = new Date();
 	LogInfo(
 		Sunbot,
 		`
-======================== Send ========================
+========================= Send ========================
+To: ${isRoom ? `Room: ${roomTopic}(${roomID})` : `${talker}(${talkerID})`}
+Time: ${now.toLocaleString()}
 ${text}
-======================================================`,
+=======================================================`,
 	);
-	tmp.say(text);
+	try {
+		if (Config.bot.enableSendingMessage) send?.say(text);
+	} catch (err) {
+		LogError(Sunbot, 'Sending message failed.', err);
+	}
 }

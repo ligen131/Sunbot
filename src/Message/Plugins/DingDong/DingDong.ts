@@ -19,13 +19,13 @@
  */
 'use strict';
 
-import { IMessage } from '../../Parser/Parser';
-import { Send } from '../../SendMessage';
+import { IMessage } from '../../parser/parser';
+import { Send } from '../../sendMessage';
 import {
 	PLUGIN_DINGDONG_HELPLIST_LONG,
 	PLUGIN_DINGDONG_HELPLIST_SHORT,
-} from '../../../utils/words';
-import { IPlugins } from '../Plugins';
+} from '../../../constant/words';
+import { IPlugins } from '../plugins';
 
 export { PluginDingDong };
 
@@ -47,7 +47,7 @@ class PluginDingDong implements IPlugins {
 		return ret;
 	}
 	action(message: IMessage): void {
-		Send(message.message, `dong`);
+		Send(message, `dong`);
 	}
 
 	async is_match_private(message: IMessage): Promise<boolean> {

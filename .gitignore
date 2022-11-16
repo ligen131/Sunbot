@@ -104,8 +104,9 @@ dist
 .tern-port
 
 # vsCode tmp file
-$LocalAppData%
+%LocalAppData%
 
 template.ts
-
 config/config.json
+src/config.js
+data/
