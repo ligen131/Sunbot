@@ -22,19 +22,6 @@ All operations of Sunbot is based on command call. You just need to send simple 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
 2. repeater: If 4 consecutive identical text messages are detected in the current room chat, the message will be automatically repeated.
 
-By the way, you can set whether to enable each plugin in the configuration.
-
-```json
-  "plugins": {
-    "dingdong": {
-      "enable": true
-    },
-    "repeater": {
-      "enable": true
-    }
-  }
-```
-
 ## Status Page
 
 After bot starts normally, it will automatically start the status page, which listens at `http://localhost:4721` by default. You can change the default port in the configuration.
@@ -58,6 +45,19 @@ After bot starts normally, it will automatically start the status page, which li
   $ npm run start
   ```
 
+By the way, you can set whether to enable each plugin in the configuration.
+
+```json
+  "plugins": {
+    "dingdong": {
+      "enable": true
+    },
+    "repeater": {
+      "enable": true
+    }
+  }
+```
+
 ## Build
 
 ```shell
@@ -65,6 +65,22 @@ $ npm run build
 ```
 
 The built file will generate into folder `dist`.
+
+## Development
+
+Run the following command, which supports real-time compilation and operation.
+
+```shell
+$ npm run dev
+```
+
+Run the following command, which supports performs TypeScript code inspection with `ESLint` and auto-formatting code with `prettier`.
+
+```shell
+$ npm run check
+```
+
+Code formatting and inspection will be performed automatically every time you run `git commit`, and the commit will not be allowed if the inspection fails.
 
 ## LICENSE
 
