@@ -21,6 +21,17 @@ All operations of Sunbot is based on command call. You just need to send simple 
 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
 
+## Status Page
+
+After bot starts normally, it will automatically start the status page, which listens at `http://localhost:4721` by default. You can change the default port in the configuration.
+
+```json
+  "statusPage": {
+    "enable": true,
+    "port": 4721
+  },
+```
+
 ## Usage
 
 1. Rename `config/config-example.json` to `config/config.json`. Modify the configuration file according to your actual situation.  

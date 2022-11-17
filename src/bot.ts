@@ -26,10 +26,12 @@ import { WechatyInterface } from 'wechaty/impls';
 import type { GError } from 'gerror';
 import { PluginHeartBeat, PluginRegister } from './message/plugins/plugins';
 import * as Config from '../config/config.json';
+import { Server } from './status/server';
 export { Bot, Sunbot };
 
 class Bot {
 	private bot: WechatyInterface;
+	private _startTime: Date;
 	public constructor(private _name: string) {
 		this.bot = WechatyBuilder.build({
 			name: _name,
@@ -38,15 +40,25 @@ class Bot {
 				token: Config.bot.puppetOptions.token,
 			},
 		});
+		this._startTime = new Date(0);
 	}
 
 	name(): string {
 		return this._name;
 	}
+	get startTime(): Date {
+		return this._startTime;
+	}
 
 	private onLogin(user: Contact): void {
 		LogInfo(this, `Bot ${user.name()} login.`);
+
 		PluginRegister();
+
+		this._startTime = new Date();
+		if (Config.statusPage.enable) {
+			Server(this, Config.statusPage.port);
+		}
 	}
 
 	private onLogout(user: Contact): void {
@@ -58,7 +70,7 @@ class Bot {
 	}
 
 	public Start(): void {
-		this.bot.on('login', this.onLogin);
+		this.bot.on('login', this.onLogin.bind(this));
 		this.bot.on('logout', this.onLogout);
 		this.bot.on('error', this.onError);
 		this.bot.on('heartbeat', PluginHeartBeat);

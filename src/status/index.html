@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Sunbot Status Page</title>
+</head>
+<body>
+
+  <h1>Sunbot Status Page</h1>
+  <h2>Sunbot is <span style="color: rgb(64, 207, 64)">available</span> now!</h2>
+
+  <p>Open source project: <a href="https://github.com/ligen131/Sunbot/tree/dev">https://github.com/ligen131/Sunbot/tree/dev</a></p>
+  <a target="_blank" href="https://github.com/wechaty/wechaty" alt="Powered by Wechaty">
+    <img src="https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg" style="max-width: 100%;" alt="Powered by Wechaty">
+  </a>
+  <a target="_blank" href="https://nodejs.org/" alt="Node.js v16">
+    <img src="https://img.shields.io/badge/node-%3E%3D16-green.svg" style="max-width: 100%;" alt="Node.js v16">
+  </a>
+  <a target="_blank" href="https://www.typescriptlang.org/" alt="TypeScript">
+    <img src="https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg" style="max-width: 100%;" alt="TypeScript">
+  </a>
+  <a target="_blank" href="https://github.com/ligen131/Sunbot/tree/dev" alt="GitHub last commit (branch)">
+    <img src="https://img.shields.io/github/last-commit/ligen131/Sunbot/dev" style="max-width: 100%;" alt="GitHub last commit (branch)">
+  </a>
+  <a target="_blank" href="https://www.gnu.org/licenses/gpl-3.0.html" alt="License">
+    <img src="https://img.shields.io/github/license/ligen131/Sunbot" style="max-width: 100%;" alt="License">
+  </a>
+  <br>
+  <a target="_blank" href="https://wechaty.js.org/docs/contributing/" alt="Wechaty Contributor Program">
+    <img src="https://img.shields.io/badge/Wechaty-Contributor%20Program-green.svg" style="max-width: 100%;" alt="Wechaty Contributor Program">
+  </a>
+  <a href="https://www.oscs1024.com/project/oscs/ligen131/Sunbot?ref=badge_small" alt="OSCS Status">
+    <img src="https://www.oscs1024.com/platform/badge/ligen131/Sunbot.svg?size=small" alt="OSCS Status"/>
+  </a>
+  
+  <p>Sunbot has been running non-stop for <span class="running-time" data-running-time="0">0 Days 00:00:00</span>.</p>
+  <p>Server time: <span class="time" data-time="0">1970/1/1 08:00:00</span></p>
+
+
+  <style>
+    html {
+      background: #EFF5F5;
+      background-size: cover;
+      font-family: 'helvetica neue';
+      text-align: center;
+      color: #497174;
+      font-size: 10px;
+    }
+
+    body {
+      font-size: 2rem;
+      align-items: center;
+    }
+
+    a {
+      text-decoration: none;
+    }
+  </style>
+
+  <script>
+    const runningTime = document.querySelector('.running-time');
+    const time = document.querySelector('.time');
+    function f0(x) {
+      if (x < 10) return `0${x}`;
+      return `${x}`;
+    }
+    function clock() {
+      let runT = parseInt(runningTime.getAttribute('data-running-time'));
+      const T = parseInt(time.getAttribute('data-time'));
+      runningTime.setAttribute('data-running-time', `${runT + 1}`);
+      time.setAttribute('data-time', `${T + 1}`);
+
+      const day = Math.floor(runT / (60 * 60 * 24));
+      runT -= day * (60 * 60 * 24);
+      const h = Math.floor(runT / (60 * 60));
+      runT -= h * (60 * 60);
+      const m = Math.floor(runT / 60);
+      runT -= m * 60;
+      const s = runT;
+      runningTime.innerHTML = `${day} Days ${f0(h)}:${f0(m)}:${f0(s)}`;
+
+      time.innerHTML = (new Date(T * 1000)).toLocaleString();
+    }
+    clock();
+    setInterval(clock, 1000);
+  </script>
+
+</body>
+</html>

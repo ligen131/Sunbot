@@ -6,6 +6,10 @@
     },
     "enableSendingMessage": true
   },
+  "statusPage": {
+    "enable": true,
+    "port": 4721
+  },
   "plugins": {
     "dingdong": {
       "enable": true
