@@ -70,7 +70,7 @@ async function Parser(message: Message): Promise<IMessage> {
 		__INTERFACE_IMESSAGE_DISCRIMINATOR__: 'interface IMessage',
 		messageType: messageType,
 		message: message,
-		text: text,
+		text: message.text(),
 		count: list.length,
 		list: list,
 		isRoom: isRoom,
