@@ -1,10 +1,10 @@
 # Sunbot
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
-![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)
+[![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
-![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/dev)
-![License](https://img.shields.io/github/license/ligen131/Sunbot)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/dev)](https://github.com/ligen131/Sunbot/tree/dev)
+[![License](https://img.shields.io/github/license/ligen131/Sunbot)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [![Wechaty Contributor Program](https://img.shields.io/badge/Wechaty-Contributor%20Program-green.svg)](https://wechaty.js.org/docs/contributing/)
 [![OSCS Status](https://www.oscs1024.com/platform/badge/ligen131/Sunbot.svg?size=small)](https://www.oscs1024.com/project/ligen131/Sunbot?ref=badge_small)
