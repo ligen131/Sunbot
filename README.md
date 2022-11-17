@@ -20,6 +20,20 @@ The `dev` branch is a refactoring of the `main` branch based on [TypeScript](htt
 All operations of Sunbot is based on command call. You just need to send simple command in the chat window of WeChat/WhatsApp to the bot, and it will reply to you automatically.
 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
+2. repeater: If 4 consecutive identical text messages are detected in the current room chat, the message will be automatically repeated.
+
+By the way, you can set whether to enable each plugin in the configuration.
+
+```json
+  "plugins": {
+    "dingdong": {
+      "enable": true
+    },
+    "repeater": {
+      "enable": true
+    }
+  }
+```
 
 ## Status Page
 
