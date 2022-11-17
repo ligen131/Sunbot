@@ -1,6 +1,12 @@
 # Sunbot
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
+![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/main)
+![License](https://img.shields.io/github/license/ligen131/Sunbot)
+
+[![Wechaty Contributor Program](https://img.shields.io/badge/Wechaty-Contributor%20Program-green.svg)](https://wechaty.js.org/docs/contributing/)
+[![OSCS Status](https://www.oscs1024.com/platform/badge/ligen131/Sunbot.svg?size=small)](https://www.oscs1024.com/project/ligen131/Sunbot?ref=badge_small)
 
 **Tips: The `main` branch is deprecated and Sunbot is refactored to [TypeScript](https://www.typescriptlang.org/) in the [`dev` branch](https://github.com/ligen131/Sunbot/tree/dev).**
 
