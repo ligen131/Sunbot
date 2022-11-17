@@ -26,7 +26,7 @@ import {
 	PLUGIN_REPEATER_HELPLIST_SHORT,
 } from '../../../constant/words';
 import { IPlugins } from '../plugins';
-import { types } from 'wechaty-puppet';
+import { types } from 'wechaty';
 
 export { PluginRepeater };
 

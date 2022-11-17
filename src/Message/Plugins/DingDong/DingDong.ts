@@ -26,6 +26,7 @@ import {
 	PLUGIN_DINGDONG_HELPLIST_SHORT,
 } from '../../../constant/words';
 import { IPlugins } from '../plugins';
+import { types } from 'wechaty';
 
 export { PluginDingdong };
 
@@ -38,6 +39,7 @@ class PluginDingdong implements IPlugins {
 	command = `ding`;
 
 	async match(message: IMessage): Promise<boolean> {
+		if (message.messageType != types.Message.Text) return false;
 		let ret = false;
 		message.list.forEach(
 			((value: string) => {

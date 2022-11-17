@@ -20,8 +20,7 @@
 'use strict';
 
 import { IsRoomMessage } from '../../utils/common';
-import { Contact, Message, Room } from 'wechaty';
-import { types } from 'wechaty-puppet';
+import { Contact, Message, Room, types } from 'wechaty';
 
 export { IMessage, Parser, InstanceOfIMessage };
 
