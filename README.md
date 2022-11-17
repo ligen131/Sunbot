@@ -80,7 +80,13 @@ Run the following command, which supports performs TypeScript code inspection wi
 $ npm run check
 ```
 
-Code formatting and inspection will be performed automatically every time you run `git commit`, and the commit will not be allowed if the inspection fails.
+Code formatting and inspection will be performed automatically every time you commit, and the commit will not be allowed if the inspection fails.
+
+In order to make the commit more standardized (git-emoji-commit), please use the following command to commit:
+
+```shell
+$ npm run check && git add . && npm run commit
+```
 
 ## LICENSE
 

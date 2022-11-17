@@ -8,7 +8,7 @@
     "npm": ">=7"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\"",
+    "test": "echo Error: no test specified",
     "start": "npm run check && ts-node src/index.ts",
     "start-directly": "ts-node src/index.ts",
     "build": "rm -rf dist && npm run check && tsc --build",
@@ -20,7 +20,7 @@
     "prettier:comment": "自动格式化 src 目录下的所有 .ts 文件",
     "prettier": "prettier --write \"src/**/*.ts\"",
     "commit:comment": "引导设置规范化的提交信息",
-    "commit": "cz"
+    "commit": "cz-customizable"
   },
   "author": "ligen131",
   "license": "GPL-3.0-or-later",
@@ -41,12 +41,15 @@
     "wechaty-puppet-xp": "^1.10.27"
   },
   "devDependencies": {
-    "@commitlint/cli": "^17.1.2",
+    "@commitlint/cli": "^17.2.0",
     "@commitlint/config-conventional": "^17.1.0",
     "@types/node": "^18.7.14",
     "@typescript-eslint/eslint-plugin": "^5.36.1",
     "@typescript-eslint/parser": "^5.36.1",
+    "commitlint-config-cz": "^0.13.3",
+    "commitlint-config-git-commit-emoji": "^1.0.0",
     "cz-conventional-changelog": "^3.3.0",
+    "cz-customizable": "^7.0.0",
     "eslint": "^8.23.0",
     "husky": "^8.0.1",
     "nodemon": "^2.0.19",
