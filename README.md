@@ -3,6 +3,9 @@
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
 ![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
+[![OSCS Status](https://www.oscs1024.com/platform/badge/ligen131/Sunbot.svg?size=small)](https://www.oscs1024.com/project/ligen131/Sunbot?ref=badge_small)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/dev)
+![License](https://img.shields.io/github/license/ligen131/Sunbot)
 
 A WeChat bot powered by [WeChaty](https://github.com/wechaty/wechaty).
 
