@@ -22,7 +22,8 @@
 import { Sunbot } from '../../bot';
 import { LogInfo } from '../../utils/logs';
 import { IMessage } from '../parser/parser';
-import { PluginDingDong } from './dingdong/dingdong';
+import { PluginDingdong } from './dingdong/dingdong';
+import * as Config from '../../../config/config.json';
 
 export {
 	IPlugins,
@@ -51,10 +52,13 @@ let Plugins: IPlugins[];
 
 async function PluginRegister(): Promise<void> {
 	LogInfo(Sunbot, `Start to register plugins.`);
-	Plugins = [new PluginDingDong()];
+	Plugins = [];
+
+	if (Config.plugins.dingdong.enable) Plugins.push(new PluginDingdong());
+
 	Plugins.forEach((plugin) => {
 		if (plugin.register) {
-			plugin?.register();
+			plugin.register();
 		}
 	});
 }

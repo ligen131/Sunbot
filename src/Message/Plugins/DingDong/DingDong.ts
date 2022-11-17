@@ -27,9 +27,9 @@ import {
 } from '../../../constant/words';
 import { IPlugins } from '../plugins';
 
-export { PluginDingDong };
+export { PluginDingdong };
 
-class PluginDingDong implements IPlugins {
+class PluginDingdong implements IPlugins {
 	plugin_name = 'ding-dong';
 	plugin_id = 1;
 	plugin_helplist_short: string = PLUGIN_DINGDONG_HELPLIST_SHORT;

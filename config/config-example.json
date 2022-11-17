@@ -5,5 +5,10 @@
       "token": "xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx"
     },
     "enableSendingMessage": true
+  },
+  "plugins": {
+    "dingdong": {
+      "enable": true
+    }
   }
 }
