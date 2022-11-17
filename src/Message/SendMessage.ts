@@ -24,38 +24,45 @@ import { LogError, LogInfo } from '../utils/logs';
 import { Contact, Room } from 'wechaty';
 import * as Config from '../../config/config.json';
 import { IMessage, InstanceOfIMessage } from './parser/parser';
+import { InstanceOfContact } from '../utils/common';
 
 export { Send };
 
-async function Send(tmp: Contact | IMessage, text: string) {
+async function Send(tmp: Contact | Room | IMessage, text: string) {
 	let send: Contact | Room | undefined;
-	let roomTopic, roomID, talker, talkerID: string | undefined;
+	let roomTopic, roomID, talkerName, talkerID: string | undefined;
 	let isRoom = false;
 	if (InstanceOfIMessage(tmp)) {
 		if (tmp.isRoom) {
-			send = tmp.message.room();
+			send = tmp.room;
 			roomTopic = tmp.roomTopic;
 			roomID = tmp.roomID;
 			isRoom = true;
 		} else {
-			send = tmp.message.talker();
-			talker = tmp.talker;
+			send = tmp.talker;
+			talkerName = tmp.talkerName;
 			talkerID = tmp.talkerID;
 		}
+	} else if (InstanceOfContact(tmp)) {
+		send = tmp;
+		talkerName = tmp?.name();
+		talkerID = tmp.id;
 	} else {
 		send = tmp;
-		talker = tmp.name();
-		talkerID = tmp.id;
+		roomTopic = await tmp.topic();
+		roomID = tmp.id;
+		isRoom = true;
 	}
 	const now = new Date();
 	LogInfo(
 		Sunbot,
 		`
 ========================= Send ========================
-To: ${isRoom ? `Room: ${roomTopic}(${roomID})` : `${talker}(${talkerID})`}
+To: ${isRoom ? `Room: ${roomTopic}(${roomID})` : `${talkerName}(${talkerID})`}
 Time: ${now.toLocaleString()}
 ${text}
-=======================================================`,
+=======================================================
+`,
 	);
 	try {
 		if (Config.bot.enableSendingMessage) send?.say(text);

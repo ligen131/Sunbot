@@ -19,10 +19,18 @@
  */
 'use strict';
 
-import { Message } from 'wechaty';
+import { Contact, Message, Room } from 'wechaty';
 
-export { IsRoomMessage };
+export { IsRoomMessage, InstanceOfContact, InstanceOfRoom };
 
-async function IsRoomMessage(message: Message): Promise<boolean> {
+function IsRoomMessage(message: Message): boolean {
 	return null != message.room();
+}
+
+function InstanceOfContact(object: any): object is Contact {
+	return object?.name() != undefined;
+}
+
+function InstanceOfRoom(object: any): object is Room {
+	return object?.topic() != undefined;
 }

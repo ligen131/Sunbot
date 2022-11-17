@@ -24,3 +24,7 @@ export const PLUGIN_DINGDONG_HELPLIST_LONG = `ding
 在 bot 状态正常运行下，会默认回复 dong。
   -h, -H  打开该帮助列表
 `;
+export const PLUGIN_REPEATER_HELPLIST_SHORT = `[repeat_words]  -  复读功能`;
+export const PLUGIN_REPEATER_HELPLIST_LONG = `[repeat_words]
+在当前会话下检测到连续 4 条相同的文本信息，会自动复读该信息。
+`;

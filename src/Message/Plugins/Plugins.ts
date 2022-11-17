@@ -24,6 +24,7 @@ import { LogInfo } from '../../utils/logs';
 import { IMessage } from '../parser/parser';
 import { PluginDingdong } from './dingdong/dingdong';
 import * as Config from '../../../config/config.json';
+import { PluginRepeater } from './repeater/repeater';
 
 export {
 	IPlugins,
@@ -39,7 +40,7 @@ interface IPlugins {
 	plugin_helplist_short: string;
 	plugin_helplist_long: string;
 	is_database_used: boolean;
-	command: string | string[];
+	command: string | string[] | undefined;
 	register?(): void | Promise<void>;
 	is_match_private(message: IMessage): void | Promise<boolean>;
 	private_action(message: IMessage): void | Promise<void>;
@@ -55,6 +56,7 @@ async function PluginRegister(): Promise<void> {
 	Plugins = [];
 
 	if (Config.plugins.dingdong.enable) Plugins.push(new PluginDingdong());
+	if (Config.plugins.repeater.enable) Plugins.push(new PluginRepeater());
 
 	Plugins.forEach((plugin) => {
 		if (plugin.register) {

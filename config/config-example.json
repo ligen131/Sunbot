@@ -9,6 +9,9 @@
   "plugins": {
     "dingdong": {
       "enable": true
+    },
+    "repeater": {
+      "enable": true
     }
   }
 }

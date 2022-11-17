@@ -40,7 +40,7 @@ ${
 		? `Room: ${msg.roomTopic}(${msg.roomID})
 `
 		: ``
-}From: ${msg.talker}(${msg.talkerID})
+}From: ${msg.talkerName}(${msg.talkerID})
 Time: ${msg.time.toLocaleString()}
 List length: ${msg.count}
 ${msg.list}

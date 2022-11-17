@@ -20,19 +20,24 @@
 'use strict';
 
 import { IsRoomMessage } from '../../utils/common';
-import { Message } from 'wechaty';
+import { Contact, Message, Room } from 'wechaty';
+import { types } from 'wechaty-puppet';
 
 export { IMessage, Parser, InstanceOfIMessage };
 
 interface IMessage {
 	__INTERFACE_IMESSAGE_DISCRIMINATOR__: 'interface IMessage'; // Important: Remember to add discriminator when implement
+	messageType: types.Message;
 	message: Message;
+	text: string;
 	count: number;
 	list: string[];
 	isRoom: boolean;
+	room?: Room;
 	roomTopic?: string;
 	roomID?: string;
-	talker: string;
+	talker: Contact;
+	talkerName: string;
 	talkerID: string;
 	time: Date;
 }
@@ -50,24 +55,33 @@ async function Parser(message: Message): Promise<IMessage> {
 	list = list.filter((value) => {
 		return value && value.trim();
 	});
-
-	const isRoom: boolean = await IsRoomMessage(message);
-	const roomTopic = await message.room()?.topic(),
-		roomID = message.room()?.id;
-	const talkerName = message.talker().name(),
-		talkerID = message.talker().id;
+	const messageType = message.type();
 	const time = message.date();
 
-	return {
+	const isRoom: boolean = IsRoomMessage(message);
+	const room = message.room();
+	const roomTopic = await room?.topic();
+	const roomID = room?.id;
+
+	const talker = message.talker();
+	const talkerName = talker.name();
+	const talkerID = talker.id;
+
+	const ret: IMessage = {
 		__INTERFACE_IMESSAGE_DISCRIMINATOR__: 'interface IMessage',
+		messageType: messageType,
 		message: message,
+		text: text,
 		count: list.length,
 		list: list,
 		isRoom: isRoom,
+		room: room,
 		roomTopic: roomTopic,
 		roomID: roomID,
-		talker: talkerName,
+		talker: talker,
+		talkerName: talkerName,
 		talkerID: talkerID,
 		time: time,
-	} as IMessage;
+	};
+	return ret;
 }
