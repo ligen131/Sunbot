@@ -86,7 +86,6 @@ class PluginFood implements IPlugins {
 					LogError(bot, 'Parse food.csv failed.', err);
 					return;
 				}
-				console.log(result);
 				result.forEach((value, index) => {
 					if (result[index].note?.indexOf('\\n')) {
 						result[index].note = result[index].note?.replaceAll('\\n', '\n');

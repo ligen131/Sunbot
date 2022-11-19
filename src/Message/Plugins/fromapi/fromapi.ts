@@ -68,7 +68,6 @@ class PluginFromapi implements IPlugins {
 			command: '发狗狗',
 			dealFunc: this.dogsDealFunc,
 		});
-		console.log(this.apis);
 	}
 
 	count = 0;
@@ -111,7 +110,6 @@ class PluginFromapi implements IPlugins {
 				LogWarn(bot, 'Fetch failed', err);
 			}
 		} while (ok < 10);
-		console.log(json);
 		if (json && json?.mimetype != 'image/gif') {
 			const file = FileBox.fromUrl(this.apis[0].url + json.url);
 			console.log(file);
@@ -146,7 +144,6 @@ class PluginFromapi implements IPlugins {
 				LogWarn(bot, 'Fetch failed', err);
 			}
 		} while (ok < 10);
-		console.log(json);
 		if (json?.message) {
 			const file = FileBox.fromUrl(json.message);
 			console.log(file);
