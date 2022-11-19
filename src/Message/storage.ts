@@ -19,21 +19,23 @@
  */
 'use strict';
 
+import { RowDataPacket } from 'mysql2';
+import Query from 'mysql2/typings/mysql/lib/protocol/sequences/Query';
 import { db } from '../db/db';
 import { IMessage } from './message';
 
 export { MessageStorage };
 
-// interface IDBMessage {
-//   type: number;
-//   txt: string;
-//   isRoom: boolean;
-//   roomTopic?: string;
-//   roomID?: string;
-//   talkerName: string;
-//   talkerID: string;
-//   time: number; // millisecond timestamp
-// }
+interface IDBMessage {
+	type: number;
+	txt: string;
+	isRoom: boolean;
+	roomTopic?: string;
+	roomID?: string;
+	talkerName: string;
+	talkerID: string;
+	time: number; // millisecond timestamp
+}
 
 class _MessageStorage {
 	tableName = 'messages';
@@ -51,7 +53,10 @@ class _MessageStorage {
     )`);
 	}
 
-	insertMessage(message: IMessage) {
+	insertMessage(
+		message: IMessage,
+		callback?: (err: Query.QueryError | null) => any,
+	) {
 		const query = `INSERT INTO ${this.tableName} VALUES(?,?,?,?,?,?,?,?);`;
 		db.db?.query(
 			query,
@@ -65,20 +70,49 @@ class _MessageStorage {
 				message.talkerID,
 				message.time.getTime(),
 			],
-			(err, result) => {
-				console.log('Storaged message', err, result);
+			(err: Query.QueryError | null) => {
+				if (err && callback) {
+					callback(err);
+				}
 			},
 		);
 	}
 
-	findMessageByRoomID(roomID: string, limit?: number) {
+	findMessageByRoomID(
+		roomID: string,
+		callback?: (
+			err: Query.QueryError | null,
+			results: IDBMessage[] | undefined,
+		) => any,
+		limit?: number,
+	) {
 		const query = `SELECT * FROM ${
 			this.tableName
 		} WHERE room_ID=? ORDER BY time${
 			limit && limit > 0 ? ` LIMIT ${limit}` : ``
 		};`;
 		db.db?.query(query, [roomID], (err, results) => {
-			console.log('Found', err, results);
+			if (callback) {
+				if (err) {
+					callback(err, undefined);
+				} else {
+					const r = <RowDataPacket>results;
+					const resultList: IDBMessage[] = [];
+					r.forEach((result: any) => {
+						resultList.push({
+							type: result.type,
+							txt: result.txt,
+							isRoom: result.is_room,
+							roomTopic: result.room_topic,
+							roomID: result.room_ID,
+							talkerName: result.talker_name,
+							talkerID: result.talker_ID,
+							time: result.time,
+						});
+						callback(err, resultList);
+					});
+				}
+			}
 		});
 	}
 }
