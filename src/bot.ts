@@ -31,11 +31,11 @@ import { db } from './db/db';
 export { Bot };
 
 class Bot {
-	private bot: WechatyInterface;
+	private _bot: WechatyInterface;
 	private _startTime: Date;
 	private _dbUsed = false;
 	public constructor(private _name: string) {
-		this.bot = WechatyBuilder.build({
+		this._bot = WechatyBuilder.build({
 			name: _name,
 			puppet: Config.bot.puppet as OfficialPuppetNpmName,
 			puppetOptions: {
@@ -53,6 +53,9 @@ class Bot {
 	}
 	get dbUsed(): boolean {
 		return this._dbUsed;
+	}
+	get bot(): WechatyInterface {
+		return this._bot;
 	}
 
 	private async onLogin(user: Contact): Promise<void> {
@@ -88,13 +91,13 @@ class Bot {
 	}
 
 	public Start(): void {
-		this.bot.on('login', this.onLogin.bind(this));
-		this.bot.on('logout', this.onLogout);
-		this.bot.on('error', this.onError);
-		this.bot.on('heartbeat', () => PluginHeartBeat(this));
-		this.bot.on('message', (message) => OnMessage(this, message));
+		this._bot.on('login', this.onLogin.bind(this));
+		this._bot.on('logout', this.onLogout);
+		this._bot.on('error', this.onError);
+		this._bot.on('heartbeat', () => PluginHeartBeat(this));
+		this._bot.on('message', (message) => OnMessage(this, message));
 
-		this.bot
+		this._bot
 			.start()
 			.then(() => LogInfo(this, `Bot started.`))
 			.catch((err) => LogError(this, err));

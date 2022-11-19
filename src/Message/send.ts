@@ -20,8 +20,8 @@
 'use strict';
 
 import { Bot } from '../bot';
-import { LogError, LogInfo } from '../utils/logs';
-import { Contact, Room } from 'wechaty';
+import { LogError, LogInfo, LogWarn } from '../utils/logs';
+import { Contact, Room, Sayable } from 'wechaty';
 import * as Config from '../../config/config.json';
 import { IMessage, InstanceOfIMessage } from './message';
 import { InstanceOfContact } from '../utils/common';
@@ -33,7 +33,7 @@ export { Send };
  * @todo(ligen131): find Contact or Room while IMessage.message === undefined
  *
  **/
-async function Send(bot: Bot, tmp: Contact | Room | IMessage, text: string) {
+async function Send(bot: Bot, tmp: Contact | Room | IMessage, text: Sayable) {
 	let send: Contact | Room | undefined;
 	let roomTopic, roomID, talkerName, talkerID: string | undefined;
 	let isRoom = false;
@@ -65,12 +65,13 @@ async function Send(bot: Bot, tmp: Contact | Room | IMessage, text: string) {
 ========================= Send ========================
 To: ${isRoom ? `Room: ${roomTopic}(${roomID})` : `${talkerName}(${talkerID})`}
 Time: ${now.toLocaleString()}
-${text}
+${text.toString()}
 =======================================================
 `,
 	);
 	try {
 		if (Config.bot.enableSendingMessage) send?.say(text);
+		else LogWarn(bot, 'Sending messages is disabled.');
 	} catch (err) {
 		LogError(bot, 'Sending message failed.', err);
 	}

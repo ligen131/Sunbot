@@ -13,6 +13,7 @@
   "database": {
     "enable": true,
     "host": "127.0.0.1",
+    "port": 3306,
     "user": "sun",
     "password": "123456",
     "database": "sunbot"
@@ -22,6 +23,12 @@
       "enable": true
     },
     "repeater": {
+      "enable": true
+    },
+    "cats": {
+      "enable": true
+    },
+    "dogs": {
       "enable": true
     }
   }

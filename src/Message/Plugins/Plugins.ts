@@ -25,6 +25,7 @@ import { IMessage } from '../message';
 import { PluginDingdong } from './dingdong/dingdong';
 import * as Config from '../../../config/config.json';
 import { PluginRepeater } from './repeater/repeater';
+import { PluginFromapi } from './fromapi/fromapi';
 
 export {
 	IPlugins,
@@ -42,7 +43,7 @@ interface IPlugins {
 	plugin_helplist_long: string;
 	is_database_used: boolean;
 	command: string | string[] | undefined;
-	register?(bot: Bot): void | Promise<void>;
+	register?(bot?: Bot): void | Promise<void>;
 	is_match_private(bot: Bot, message: IMessage): void | Promise<boolean>;
 	private_action(bot: Bot, message: IMessage): void | Promise<void>;
 	is_match_room(bot: Bot, message: IMessage): boolean | Promise<boolean>;
@@ -50,10 +51,15 @@ interface IPlugins {
 	heart_beat_action?(bot: Bot): void | Promise<void>;
 }
 
-const Plugins: IPlugins[] = [new PluginDingdong(), new PluginRepeater()];
+const Plugins: IPlugins[] = [
+	new PluginDingdong(),
+	new PluginRepeater(),
+	new PluginFromapi(),
+];
 const PluginsEnable: boolean[] = [
 	Config.plugins.dingdong.enable,
 	Config.plugins.repeater.enable,
+	true,
 ];
 
 async function PluginRegister(bot: Bot): Promise<void> {

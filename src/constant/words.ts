@@ -28,3 +28,7 @@ export const PLUGIN_REPEATER_HELPLIST_SHORT = `[repeat_words]  -  复读功能`;
 export const PLUGIN_REPEATER_HELPLIST_LONG = `[repeat_words]
 在当前会话下检测到连续 4 条相同的文本信息，会自动复读该信息。
 `;
+export const PLUGIN_FROMAPI_HELPLIST_SHORT = `发[猫猫/狗狗]  -  发送一张猫猫/狗狗图片`;
+export const PLUGIN_FROMAPI_HELPLIST_LONG = `发[猫猫/狗狗]
+调用 API 发送一张猫猫/狗狗图片。如果长时间没有反应，请再试一次。
+`;
