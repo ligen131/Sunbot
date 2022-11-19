@@ -19,16 +19,21 @@
  */
 'use strict';
 
-import { Sunbot } from '../bot';
+import { Bot } from '../bot';
 import { LogError, LogInfo } from '../utils/logs';
 import { Contact, Room } from 'wechaty';
 import * as Config from '../../config/config.json';
-import { IMessage, InstanceOfIMessage } from './parser/parser';
+import { IMessage, InstanceOfIMessage } from './message';
 import { InstanceOfContact } from '../utils/common';
 
 export { Send };
 
-async function Send(tmp: Contact | Room | IMessage, text: string) {
+/**
+ *
+ * @todo(ligen131): find Contact or Room while IMessage.message === undefined
+ *
+ **/
+async function Send(bot: Bot, tmp: Contact | Room | IMessage, text: string) {
 	let send: Contact | Room | undefined;
 	let roomTopic, roomID, talkerName, talkerID: string | undefined;
 	let isRoom = false;
@@ -55,7 +60,7 @@ async function Send(tmp: Contact | Room | IMessage, text: string) {
 	}
 	const now = new Date();
 	LogInfo(
-		Sunbot,
+		bot,
 		`
 ========================= Send ========================
 To: ${isRoom ? `Room: ${roomTopic}(${roomID})` : `${talkerName}(${talkerID})`}
@@ -67,6 +72,6 @@ ${text}
 	try {
 		if (Config.bot.enableSendingMessage) send?.say(text);
 	} catch (err) {
-		LogError(Sunbot, 'Sending message failed.', err);
+		LogError(bot, 'Sending message failed.', err);
 	}
 }

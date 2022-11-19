@@ -19,9 +19,10 @@
  */
 'use strict';
 
-import { Sunbot } from './bot';
+import { Bot } from './bot';
 
 function main() {
+	const Sunbot = new Bot('Sunbot');
 	Sunbot.Start();
 }
 

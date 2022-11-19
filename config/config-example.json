@@ -10,6 +10,13 @@
     "enable": true,
     "port": 4721
   },
+  "database": {
+    "enable": true,
+    "host": "127.0.0.1",
+    "user": "sun",
+    "password": "123456",
+    "database": "sunbot"
+  },
   "plugins": {
     "dingdong": {
       "enable": true

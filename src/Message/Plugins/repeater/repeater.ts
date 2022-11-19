@@ -19,18 +19,20 @@
  */
 'use strict';
 
-import { IMessage } from '../../parser/parser';
-import { Send } from '../../sendMessage';
+import { IMessage } from '../../message';
+import { Send } from '../../send';
 import {
 	PLUGIN_REPEATER_HELPLIST_LONG,
 	PLUGIN_REPEATER_HELPLIST_SHORT,
 } from '../../../constant/words';
 import { IPlugins } from '../plugins';
 import { types } from 'wechaty';
+import { Bot } from 'bot';
 
 export { PluginRepeater };
 
 class PluginRepeater implements IPlugins {
+	enable = false;
 	plugin_name = 'repeater';
 	plugin_id = 2;
 	plugin_helplist_short: string = PLUGIN_REPEATER_HELPLIST_SHORT;
@@ -46,7 +48,7 @@ class PluginRepeater implements IPlugins {
 	} = {};
 	repeatThreshold = 4;
 
-	async match(message: IMessage): Promise<boolean> {
+	async match(bot: Bot, message: IMessage): Promise<boolean> {
 		if (!message.isRoom || !message.roomID) return false;
 		if (message.messageType != types.Message.Text) {
 			this.messageMap[message.roomID] = {
@@ -72,21 +74,21 @@ class PluginRepeater implements IPlugins {
 		}
 		return ret;
 	}
-	action(message: IMessage): void {
-		Send(message, message.text);
+	action(bot: Bot, message: IMessage): void {
+		Send(bot, message, message.text);
 	}
 
-	async is_match_private(message: IMessage): Promise<boolean> {
-		return await this.match(message);
+	async is_match_private(bot: Bot, message: IMessage): Promise<boolean> {
+		return await this.match(bot, message);
 	}
-	private_action(message: IMessage): void {
-		this.action(message);
+	private_action(bot: Bot, message: IMessage): void {
+		this.action(bot, message);
 	}
 
-	async is_match_room(message: IMessage): Promise<boolean> {
-		return await this.match(message);
+	async is_match_room(bot: Bot, message: IMessage): Promise<boolean> {
+		return await this.match(bot, message);
 	}
-	room_action(message: IMessage): void {
-		this.action(message);
+	room_action(bot: Bot, message: IMessage): void {
+		this.action(bot, message);
 	}
 }

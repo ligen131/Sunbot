@@ -21,7 +21,13 @@
 
 import { Contact, Message, Room } from 'wechaty';
 
-export { IsRoomMessage, InstanceOfContact, InstanceOfRoom };
+export {
+	IsRoomMessage,
+	InstanceOfContact,
+	InstanceOfRoom,
+	GetError,
+	GetErrorMessage,
+};
 
 function IsRoomMessage(message: Message): boolean {
 	return null != message.room();
@@ -33,4 +39,13 @@ function InstanceOfContact(object: any): object is Contact {
 
 function InstanceOfRoom(object: any): object is Room {
 	return object?.topic() != undefined;
+}
+
+function GetErrorMessage(err: unknown): string {
+	if (err instanceof Error) return err.message;
+	return String(err);
+}
+
+function GetError(err: unknown): Error {
+	return new Error(GetErrorMessage(err));
 }

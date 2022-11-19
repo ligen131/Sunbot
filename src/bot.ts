@@ -19,19 +19,21 @@
  */
 'use strict';
 
-import { OnMessage } from './message/onMessage';
-import { LogError, LogInfo } from './utils/logs';
+import { InitMessage, OnMessage } from './message/message';
+import { LogError, LogInfo, LogWarn } from './utils/logs';
 import { Contact, OfficialPuppetNpmName, WechatyBuilder } from 'wechaty';
 import { WechatyInterface } from 'wechaty/impls';
 import type { GError } from 'gerror';
 import { PluginHeartBeat, PluginRegister } from './message/plugins/plugins';
 import * as Config from '../config/config.json';
 import { Server } from './status/server';
-export { Bot, Sunbot };
+import { db } from './db/db';
+export { Bot };
 
 class Bot {
 	private bot: WechatyInterface;
 	private _startTime: Date;
+	private _dbUsed = false;
 	public constructor(private _name: string) {
 		this.bot = WechatyBuilder.build({
 			name: _name,
@@ -49,11 +51,27 @@ class Bot {
 	get startTime(): Date {
 		return this._startTime;
 	}
+	get dbUsed(): boolean {
+		return this._dbUsed;
+	}
 
-	private onLogin(user: Contact): void {
+	private async onLogin(user: Contact): Promise<void> {
 		LogInfo(this, `Bot ${user.name()} login.`);
 
-		PluginRegister();
+		this._dbUsed = Config.database.enable;
+		if (this._dbUsed) {
+			const err = await db.connect(this);
+			if (err) {
+				LogWarn(
+					this,
+					'Failed to connect database. The databased-based plugins will automatically disabled.',
+					err,
+				);
+				this._dbUsed = false;
+			}
+		}
+		await PluginRegister(this);
+		await InitMessage(this);
 
 		this._startTime = new Date();
 		if (Config.statusPage.enable) {
@@ -73,8 +91,8 @@ class Bot {
 		this.bot.on('login', this.onLogin.bind(this));
 		this.bot.on('logout', this.onLogout);
 		this.bot.on('error', this.onError);
-		this.bot.on('heartbeat', PluginHeartBeat);
-		this.bot.on('message', OnMessage);
+		this.bot.on('heartbeat', () => PluginHeartBeat(this));
+		this.bot.on('message', (message) => OnMessage(this, message));
 
 		this.bot
 			.start()
@@ -82,5 +100,3 @@ class Bot {
 			.catch((err) => LogError(this, err));
 	}
 }
-
-const Sunbot = new Bot('Sunbot');

@@ -19,15 +19,19 @@
  */
 'use strict';
 
-import { IsRoomMessage } from '../../utils/common';
+import { IsRoomMessage } from '../utils/common';
 import { Contact, Message, Room, types } from 'wechaty';
+import { LogInfo } from '../utils/logs';
+import { Bot } from '../bot';
+import { PluginPrivateAction, PluginRoomAction } from './plugins/plugins';
+import { MessageStorage } from './storage';
 
-export { IMessage, Parser, InstanceOfIMessage };
+export { IMessage, Parser, InstanceOfIMessage, OnMessage, InitMessage };
 
 interface IMessage {
 	__INTERFACE_IMESSAGE_DISCRIMINATOR__: 'interface IMessage'; // Important: Remember to add discriminator when implement
 	messageType: types.Message;
-	message: Message;
+	message: Message | undefined;
 	text: string;
 	count: number;
 	list: string[];
@@ -45,15 +49,20 @@ function InstanceOfIMessage(object: any): object is IMessage {
 	return '__INTERFACE_IMESSAGE_DISCRIMINATOR__' in object;
 }
 
-async function Parser(message: Message): Promise<IMessage> {
-	let text: string = message.text();
+function parseTextToList(text: string): string[] {
 	text = text.toLowerCase();
 	text = text.replace(/\r/g, ' ');
 	text = text.replace(/\n/g, ' ');
-	let list = text.split(' ');
-	list = list.filter((value) => {
+	text = text.replace(/\t/g, ' ');
+	const list = text.split(' ');
+	return list.filter((value) => {
 		return value && value.trim();
 	});
+}
+
+async function Parser(message: Message): Promise<IMessage> {
+	const text: string = message.text();
+	const list = parseTextToList(text);
 	const messageType = message.type();
 	const time = message.date();
 
@@ -70,7 +79,7 @@ async function Parser(message: Message): Promise<IMessage> {
 		__INTERFACE_IMESSAGE_DISCRIMINATOR__: 'interface IMessage',
 		messageType: messageType,
 		message: message,
-		text: message.text(),
+		text: text,
 		count: list.length,
 		list: list,
 		isRoom: isRoom,
@@ -83,4 +92,39 @@ async function Parser(message: Message): Promise<IMessage> {
 		time: time,
 	};
 	return ret;
+}
+
+async function InitMessage(bot: Bot): Promise<void> {
+	if (bot.dbUsed) MessageStorage.init();
+}
+
+async function OnMessage(bot: Bot, message: Message): Promise<void> {
+	LogInfo(bot, `Start to deal with message.`);
+	const msg: IMessage = await Parser(message);
+	if (bot.dbUsed) {
+		MessageStorage.insertMessage(msg);
+	}
+
+	LogInfo(
+		bot,
+		`
+======================= Message =======================
+${
+	msg.isRoom
+		? `Room: ${msg.roomTopic}(${msg.roomID})
+`
+		: ``
+}From: ${msg.talkerName}(${msg.talkerID})
+Time: ${msg.time.toLocaleString()}
+List length: ${msg.count}
+${msg.list}
+=======================================================
+`,
+	);
+
+	if (msg.isRoom) {
+		PluginRoomAction(bot, msg);
+	} else {
+		PluginPrivateAction(bot, msg);
+	}
 }

@@ -36,14 +36,39 @@ After bot starts normally, it will automatically start the status page, which li
 ## Usage
 
 1. Rename `config/config-example.json` to `config/config.json`. Modify the configuration file according to your actual situation.  
-  `bot.puppet` is what puppet you are using. For more details, see [Wechaty Puppet Providers](https://wechaty.js.org/docs/puppet-providers/).  
-  `bot.puppetOptions.token` is your puppet token. If your puppet don't need token, you needn't change it.  
-  Note: You may need to run `npm install YOUR_PUPPET_HERE` according to your puppet. For example, run `npm install wechaty-puppet-padlocal` before you get to the next step.  
-2. Run  
-  ```shell
-  $ npm install
-  $ npm run start
-  ```
+
+   `bot.puppet` is what puppet you are using. For more details, see [Wechaty Puppet Providers](https://wechaty.js.org/docs/puppet-providers/).  
+
+   `bot.puppetOptions.token` is your puppet token. If your puppet don't need token, you needn't change it.  
+
+   Note: You may need to run `npm install YOUR_PUPPET_HERE` according to your puppet. For example, run `npm install wechaty-puppet-padlocal` before you get to the next step.
+
+2. (Optional) If you need to use some database-based plugins, you need to install mysql client and mysql server.
+
+   The following plugins are implemented based on the database:
+
+   ```
+   repeater(optional)
+   ```
+   
+   Modify the `database` settings in the configuration file. If you keep the default configuration, then you need to execute the following commands. Otherwise, modify the command according to your configuration before executing it.
+
+   ```sql
+   $ mysql -u root -p
+   -- Enter your password for root
+   -- The following command will be run in mysql client
+   CREATE DATABASE `sunbot`;
+   CREATE USER `sun` IDENTIFIED BY '123456';
+   GRANT ALL ON `sunbot`.* TO `sun`;
+   EXIT;
+   ```
+
+3. Run
+
+   ```shell
+   $ npm install
+   $ npm run start
+   ```
 
 By the way, you can set whether to enable each plugin in the configuration.
 

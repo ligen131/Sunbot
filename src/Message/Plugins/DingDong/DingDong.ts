@@ -19,19 +19,21 @@
  */
 'use strict';
 
-import { IMessage } from '../../parser/parser';
-import { Send } from '../../sendMessage';
+import { IMessage } from '../../message';
+import { Send } from '../../send';
 import {
 	PLUGIN_DINGDONG_HELPLIST_LONG,
 	PLUGIN_DINGDONG_HELPLIST_SHORT,
 } from '../../../constant/words';
 import { IPlugins } from '../plugins';
 import { types } from 'wechaty';
+import { Bot } from 'bot';
 
 export { PluginDingdong };
 
 class PluginDingdong implements IPlugins {
-	plugin_name = 'ding-dong';
+	enable = false;
+	plugin_name = 'dingdong';
 	plugin_id = 1;
 	plugin_helplist_short: string = PLUGIN_DINGDONG_HELPLIST_SHORT;
 	plugin_helplist_long: string = PLUGIN_DINGDONG_HELPLIST_LONG;
@@ -48,21 +50,21 @@ class PluginDingdong implements IPlugins {
 		);
 		return ret;
 	}
-	action(message: IMessage): void {
-		Send(message, `dong`);
+	action(bot: Bot, message: IMessage): void {
+		Send(bot, message, `dong`);
 	}
 
-	async is_match_private(message: IMessage): Promise<boolean> {
+	async is_match_private(bot: Bot, message: IMessage): Promise<boolean> {
 		return await this.match(message);
 	}
-	private_action(message: IMessage): void {
-		this.action(message);
+	private_action(bot: Bot, message: IMessage): void {
+		this.action(bot, message);
 	}
 
-	async is_match_room(message: IMessage): Promise<boolean> {
+	async is_match_room(bot: Bot, message: IMessage): Promise<boolean> {
 		return await this.match(message);
 	}
-	room_action(message: IMessage): void {
-		this.action(message);
+	room_action(bot: Bot, message: IMessage): void {
+		this.action(bot, message);
 	}
 }

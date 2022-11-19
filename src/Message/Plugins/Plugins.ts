@@ -19,9 +19,9 @@
  */
 'use strict';
 
-import { Sunbot } from '../../bot';
+import { Bot } from '../../bot';
 import { LogInfo } from '../../utils/logs';
-import { IMessage } from '../parser/parser';
+import { IMessage } from '../message';
 import { PluginDingdong } from './dingdong/dingdong';
 import * as Config from '../../../config/config.json';
 import { PluginRepeater } from './repeater/repeater';
@@ -35,59 +35,66 @@ export {
 };
 
 interface IPlugins {
+	enable: boolean;
 	plugin_name: string;
 	plugin_id: number;
 	plugin_helplist_short: string;
 	plugin_helplist_long: string;
 	is_database_used: boolean;
 	command: string | string[] | undefined;
-	register?(): void | Promise<void>;
-	is_match_private(message: IMessage): void | Promise<boolean>;
-	private_action(message: IMessage): void | Promise<void>;
-	is_match_room(message: IMessage): boolean | Promise<boolean>;
-	room_action(message: IMessage): void | Promise<void>;
-	heart_beat_action?(): void | Promise<void>;
+	register?(bot: Bot): void | Promise<void>;
+	is_match_private(bot: Bot, message: IMessage): void | Promise<boolean>;
+	private_action(bot: Bot, message: IMessage): void | Promise<void>;
+	is_match_room(bot: Bot, message: IMessage): boolean | Promise<boolean>;
+	room_action(bot: Bot, message: IMessage): void | Promise<void>;
+	heart_beat_action?(bot: Bot): void | Promise<void>;
 }
 
-let Plugins: IPlugins[];
+const Plugins: IPlugins[] = [new PluginDingdong(), new PluginRepeater()];
+const PluginsEnable: boolean[] = [
+	Config.plugins.dingdong.enable,
+	Config.plugins.repeater.enable,
+];
 
-async function PluginRegister(): Promise<void> {
-	LogInfo(Sunbot, `Start to register plugins.`);
-	Plugins = [];
+async function PluginRegister(bot: Bot): Promise<void> {
+	LogInfo(bot, `Start to register plugins.`);
 
-	if (Config.plugins.dingdong.enable) Plugins.push(new PluginDingdong());
-	if (Config.plugins.repeater.enable) Plugins.push(new PluginRepeater());
+	Plugins.forEach((plugin, index) => {
+		if (PluginsEnable[index] && (!plugin.is_database_used || bot.dbUsed)) {
+			plugin.enable = true;
+		}
+	});
 
 	Plugins.forEach((plugin) => {
-		if (plugin.register) {
-			plugin.register();
+		if (plugin.enable && plugin.register) {
+			plugin.register(bot);
 		}
 	});
 }
 
-function PluginHeartBeat(): void {
+function PluginHeartBeat(bot: Bot): void {
 	if (!Plugins) return;
 	Plugins.forEach((plugin) => {
-		if (plugin.heart_beat_action) {
-			plugin.heart_beat_action();
+		if (plugin.enable && plugin.heart_beat_action) {
+			plugin.heart_beat_action(bot);
 		}
 	});
 }
 
-function PluginPrivateAction(message: IMessage): void {
+function PluginPrivateAction(bot: Bot, message: IMessage): void {
 	if (!Plugins) return;
 	Plugins.forEach(async (plugin) => {
-		if (await plugin.is_match_private(message)) {
-			plugin.private_action(message);
+		if (plugin.enable && (await plugin.is_match_private(bot, message))) {
+			plugin.private_action(bot, message);
 		}
 	});
 }
 
-function PluginRoomAction(message: IMessage): void {
+function PluginRoomAction(bot: Bot, message: IMessage): void {
 	if (!Plugins) return;
 	Plugins.forEach(async (plugin) => {
-		if (await plugin.is_match_room(message)) {
-			plugin.room_action(message);
+		if (plugin.enable && (await plugin.is_match_room(bot, message))) {
+			plugin.room_action(bot, message);
 		}
 	});
 }
