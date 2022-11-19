@@ -126,6 +126,24 @@ In order to make the commit more standardized (git-emoji-commit), please use the
 $ npm run check && git add . && npm run commit
 ```
 
+## Dependencies
+
+The following NPM packages are used by this project.
+
+```
+wechaty
+wechaty-puppet-*
+typescript
+ts-node
+express
+@types/express
+jsdom
+@types/jsdom
+mysql2
+@types/mysql
+file-box
+```
+
 ## LICENSE
 
 GNU General Public License v3.0
