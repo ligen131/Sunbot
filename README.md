@@ -1,9 +1,9 @@
-# Sunbot
+# Sunbot for Bingyan
 
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
 [![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/dev)](https://github.com/ligen131/Sunbot/tree/dev)
+[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/bingyan-wechat-bot)](https://github.com/ligen131/Sunbot/tree/bingyan-wechat-bot)
 [![License](https://img.shields.io/github/license/ligen131/Sunbot)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [![Wechaty Contributor Program](https://img.shields.io/badge/Wechaty-Contributor%20Program-green.svg)](https://wechaty.js.org/docs/contributing/)
@@ -11,7 +11,7 @@
 
 A WeChat bot powered by [WeChaty](https://github.com/wechaty/wechaty).
 
-The `dev` branch is a refactoring of the `main` branch based on [TypeScript](https://www.typescriptlang.org/).
+The `bingyan-wechat-bot` branch is extended from [`dev` branch](https://github.com/ligen131/Sunbot/tree/dev) and adds some proprietary functions.
 
 **WARNING: This project is under development and stability is not guaranteed.**
 
@@ -33,6 +33,12 @@ After bot starts normally, it will automatically start the status page, which li
     "port": 4721
   },
 ```
+
+## See also
+
+[Sunbot `dev` Branch](https://github.com/ligen131/Sunbot/tree/dev), refactoring of the `main` branch based on [TypeScript](https://www.typescriptlang.org/).
+
+[Sunbot `main` Branch](https://github.com/ligen131/Sunbot/tree/main), many interesting and fun features, such as Wordle, 1A2B game and wordcloud.
 
 ## Usage
 
