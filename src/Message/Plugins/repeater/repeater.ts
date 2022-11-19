@@ -65,6 +65,10 @@ class PluginRepeater implements IPlugins {
 			this.messageMap[message.roomID].count++;
 			if (this.messageMap[message.roomID].count >= this.repeatThreshold) {
 				ret = true;
+				this.messageMap[message.roomID] = {
+					text: message.text,
+					count: 0,
+				};
 			}
 		} else {
 			this.messageMap[message.roomID] = {
