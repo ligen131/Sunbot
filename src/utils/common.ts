@@ -49,3 +49,7 @@ function GetErrorMessage(err: unknown): string {
 function GetError(err: unknown): Error {
 	return new Error(GetErrorMessage(err));
 }
+
+export function Rand(minNum: number, maxNum: number) {
+	return minNum + Math.round((maxNum - minNum) * Math.random());
+}

@@ -26,6 +26,7 @@ import { PluginDingdong } from './dingdong/dingdong';
 import * as Config from '../../../config/config.json';
 import { PluginRepeater } from './repeater/repeater';
 import { PluginFromapi } from './fromapi/fromapi';
+import { PluginFood } from './food/food';
 
 export {
 	IPlugins,
@@ -55,11 +56,13 @@ const Plugins: IPlugins[] = [
 	new PluginDingdong(),
 	new PluginRepeater(),
 	new PluginFromapi(),
+	new PluginFood(),
 ];
 const PluginsEnable: boolean[] = [
 	Config.plugins.dingdong.enable,
 	Config.plugins.repeater.enable,
 	true,
+	Config.plugins.food.enable,
 ];
 
 async function PluginRegister(bot: Bot): Promise<void> {

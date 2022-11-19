@@ -32,3 +32,7 @@ export const PLUGIN_FROMAPI_HELPLIST_SHORT = `发[猫猫/狗狗]  -  发送一�
 export const PLUGIN_FROMAPI_HELPLIST_LONG = `发[猫猫/狗狗]
 调用 API 发送一张猫猫/狗狗图片。如果长时间没有反应，请再试一次。
 `;
+export const PLUGIN_FOOD_HELPLIST_SHORT = `吃什么  -  随机发送华科美食`;
+export const PLUGIN_FOOD_HELPLIST_LONG = `吃什么
+随机发送华科美食和介绍。
+`;

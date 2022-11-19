@@ -30,6 +30,9 @@
     },
     "dogs": {
       "enable": true
+    },
+    "food": {
+      "enable": true
     }
   }
 }

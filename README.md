@@ -22,6 +22,7 @@ All operations of Sunbot is based on command call. You just need to send simple 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
 2. repeater: If 4 consecutive identical text messages are detected in the current room chat, the message will be automatically repeated.
 3. Cats' and Dogs' photo: Send `发猫猫` or `发狗狗` to the bot and it will reply you the cats' or dogs' photo.
+4. Food Recommendation: Send `吃什么` to the bot and it will reply his food recommendation in HUST!
 
 ## Status Page
 
@@ -142,6 +143,8 @@ jsdom
 mysql2
 @types/mysql
 file-box
+fs
+csv-parse
 ```
 
 ## LICENSE
