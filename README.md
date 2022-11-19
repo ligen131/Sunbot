@@ -21,6 +21,7 @@ All operations of Sunbot is based on command call. You just need to send simple 
 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
 2. repeater: If 4 consecutive identical text messages are detected in the current room chat, the message will be automatically repeated.
+3. Cats' and Dogs' photo: Send `发猫猫` or `发狗狗` to the bot and it will reply you the cats' or dogs' photo.
 
 ## Status Page
 
@@ -78,6 +79,12 @@ By the way, you can set whether to enable each plugin in the configuration.
       "enable": true
     },
     "repeater": {
+      "enable": true
+    },
+    "cats": {
+      "enable": true
+    },
+    "dogs": {
       "enable": true
     }
   }
