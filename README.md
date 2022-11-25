@@ -3,7 +3,7 @@
 [![Powered by Wechaty](https://img.shields.io/badge/Powered%20By-Wechaty-brightgreen.svg)](https://github.com/wechaty/wechaty)
 [![Node.js v16](https://img.shields.io/badge/node-%3E%3D16-green.svg)](https://nodejs.org/)
 [![TypeScript](https://img.shields.io/badge/%3C%2F%3E-TypeScript-blue.svg)](https://www.typescriptlang.org/)
-[![GitHub last commit (branch)](https://img.shields.io/github/last-commit/ligen131/Sunbot/dev)](https://github.com/ligen131/Sunbot/tree/dev)
+[![GitHub last commit](https://img.shields.io/github/last-commit/ligen131/Sunbot)](https://github.com/ligen131/Sunbot)
 [![License](https://img.shields.io/github/license/ligen131/Sunbot)](https://www.gnu.org/licenses/gpl-3.0.html)
 
 [![Wechaty Contributor Program](https://img.shields.io/badge/Wechaty-Contributor%20Program-green.svg)](https://wechaty.js.org/docs/contributing/)
@@ -11,28 +11,29 @@
 
 A WeChat bot powered by [WeChaty](https://github.com/wechaty/wechaty).
 
-The `dev` branch is a refactoring of the `main` branch based on [TypeScript](https://www.typescriptlang.org/).
-
-**WARNING: This project is under development and stability is not guaranteed.**
-
 ## Feature and Command
 
 All operations of Sunbot is based on command call. You just need to send simple command in the chat window of WeChat/WhatsApp to the bot, and it will reply to you automatically.
 
 1. ding-dong bot: Send `ding` to the bot in wherever room or private talk. If the bot running normally, it will reply you `dong`.
 2. repeater: If 4 consecutive identical text messages are detected in the current room chat, the message will be automatically repeated.
-3. Cats' and Dogs' photo: Send `发猫猫` or `发狗狗` to the bot and it will reply you the cats' or dogs' photo.
+3. **(Unstable)** Cats' and Dogs' photo: Send `发猫猫` or `发狗狗` to the bot and it will reply you the cats' or dogs' photo.
+4. Status page:
 
-## Status Page
+   After bot starts normally, it will automatically start the status page, which listens at <http://localhost:4721> by default. You can change the default port in the configuration.
 
-After bot starts normally, it will automatically start the status page, which listens at `http://localhost:4721` by default. You can change the default port in the configuration.
+   ```json
+     "statusPage": {
+       "enable": true,
+       "port": 4721
+     },
+   ```
 
-```json
-  "statusPage": {
-    "enable": true,
-    "port": 4721
-  },
-```
+## See Also
+
+[Sunbot `js-version` branch](https://github.com/ligen131/Sunbot/tree/js-version), more interesting and fun features, such as Wordle, 1A2B game and wordcloud.
+
+[Wechaty University Admission Helper](https://ligen.life/2022/2022-09-27-wechaty-university-admission-helper/), published on the official blog of wechaty <https://wechaty.js.org/2022/09/27/wechaty-university-admission-helper/>
 
 ## Usage
 
@@ -118,6 +119,23 @@ In order to make the commit more standardized (git-emoji-commit), please use the
 
 ```shell
 $ npm run check && git add . && npm run commit
+```
+
+## Dependencies
+
+The following NPM packages are used by this project.
+
+```
+wechaty
+wechaty-puppet-*
+typescript
+ts-node
+express
+@types/express
+jsdom
+@types/jsdom
+mysql2
+@types/mysql
 ```
 
 ## LICENSE
