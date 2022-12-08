@@ -14,6 +14,7 @@ class Chatgpt extends App {
 
     this.api = undefined;
     this.lastQueryTime = 0;
+    this.conversation = new Array();
   }
   
   async initApi() {
@@ -21,31 +22,46 @@ class Chatgpt extends App {
       sessionToken: Config.CHATGPT_TOKEN
     });
     await this.api.ensureAuth();
+    this.LogInfo("[ChatGPT] Completed init ChatGPT API.");
   }
 
-  async getResponse(text) {
+  async getResponse(text, user) {
     console.log("Send to ChatGPT: ", text);
     var res = "";
     const now = new Date() - 0;
-    if (now - this.lastQueryTime < 30000) {
-      res = "Requests are too frequent, please try again later."
+    const limit = 20000;
+    var con;
+    if (now - this.lastQueryTime < limit) {
+      res = `Requests are too frequent, please try again in ${Math.ceil(limit - (now - this.lastQueryTime))} seconds.`
     }
-    else {
+    else if (text.includes("/reset")) {
+      this.conversation[user] = this.api.getConversation();
+      console.log(user, this.conversation[user]);
+      res = `Successfully reset conversation.`;
+    } else {
       try {
+        if (!this.conversation[user]) {
+          this.conversation[user] = this.api.getConversation();
+        }
+        con = this.conversation[user];
         this.lastQueryTime = now;
-        res = await this.api.sendMessage(text);
+        res = await con.sendMessage(text);
       } catch (err) {
         res = "Failed to send message to ChatGPT. Please try again later." + err.toString();
       }
     }
-    return "[OpenAI ChatGPT]\n\n" + res;
+    return `[OpenAI ChatGPT]
+Q: ${text}
+
+A: ${res}`;
   }
 
   async exec(msg) {
     var txt = await msg.text();
     if (await msg.mentionSelf()) {
+      txt = txt.replaceAll(`@${Config.BOT_NAME} `, '')
       txt = txt.replaceAll(`@${Config.BOT_NAME}`, '')
-      const ans = await this.getResponse(txt);
+      const ans = await this.getResponse(txt, await msg.talker().id);
       Reply(msg, ans);
     }
   }
