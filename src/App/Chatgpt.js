@@ -13,6 +13,7 @@ class Chatgpt extends App {
     this.ExecuteFunc = this.exec;
 
     this.api = undefined;
+    this.lastQueryTime = 0;
   }
   
   async initApi() {
@@ -25,12 +26,19 @@ class Chatgpt extends App {
   async getResponse(text) {
     console.log("Send to ChatGPT: ", text);
     var res = "";
-    try {
-      res = await this.api.sendMessage(text);
-    } catch (err) {
-      res = "Failed to send message to ChatGPT. Please try again later." + err.toString();
+    const now = new Date() - 0;
+    if (now - this.lastQueryTime < 30000) {
+      res = "Requests are too frequent, please try again later."
     }
-    return "[OpenAPI ChatGPT]\n\n" + res;
+    else {
+      try {
+        this.lastQueryTime = now;
+        res = await this.api.sendMessage(text);
+      } catch (err) {
+        res = "Failed to send message to ChatGPT. Please try again later." + err.toString();
+      }
+    }
+    return "[OpenAI ChatGPT]\n\n" + res;
   }
 
   async exec(msg) {
