@@ -19,6 +19,7 @@ import { Game_Wordle } from './App/Game_Wordle/Game_Wordle.js';
 import { EnrollHelper } from './App/EnrollHelper/EnrollHelper.js';
 import { Repeater } from './App/Repeater.js';
 import { Server } from './status/status.js';
+import { Chatgpt } from './App/Chatgpt.js';
 
 export { 
   Sun_bot,
@@ -29,6 +30,7 @@ export {
   AppGame_Wordle,
   AppEnrollHelper,
   AppRepeater,
+  AppChatgpt,
 };
 var ContactAdmin;
 var AppCodeforces = new Codeforces();
@@ -37,6 +39,7 @@ var AppGame_1A2B = new Game_1A2B();
 var AppGame_Wordle = new Game_Wordle();
 var AppEnrollHelper = new EnrollHelper();
 var AppRepeater = new Repeater();
+var AppChatgpt = new Chatgpt();
 
 var Sun_bot;
 
@@ -79,6 +82,7 @@ async function init () {
   AppGame_1A2B.InitFunc();
   AppGame_Wordle.InitFunc();
   AppEnrollHelper.InitFunc();
+  AppChatgpt.InitFunc();
   setInterval(clockEvent, 1000 * 30);
 
   Server();

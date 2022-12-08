@@ -1,5 +1,6 @@
 import { log } from 'wechaty';
 import {
+  AppChatgpt,
   AppCodeforces,
   AppEnrollHelper,
   AppGame_1A2B,
@@ -30,6 +31,7 @@ async function SunMessage (msg) {
   AppGame_Wordle.ExecuteFunc(msg);
   AppEnrollHelper.ExecuteFunc(msg);
   AppRepeater.ExecuteFunc(msg);
+  AppChatgpt.ExecuteFunc(msg);
 
   var msgfrom = await msg.talker().name();
   var msgfromid = await msg.talker().id;
