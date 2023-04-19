@@ -25,7 +25,7 @@ class Repeater extends App {
   }
   
   async Repeat(msg) {
-    if (!isRoom(msg)) return;
+    if (!(await isRoom(msg))) return;
     var roomid = await msg.room().id;
     var text = await msg.text();
     var ok = false;
