@@ -82,3 +82,4 @@ data/
 src/config.js
 %LocalAppData%
 config/config.json
+chatgpt-cache.json
