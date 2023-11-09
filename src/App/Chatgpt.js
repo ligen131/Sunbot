@@ -36,7 +36,7 @@ class Chatgpt extends App {
     const clientOptions = {
       // (Optional) Support for a reverse proxy for the completions endpoint (private API server).
       // Warning: This will expose your `openaiApiKey` to a third party. Consider the risks before using this.
-      reverseProxyUrl: 'https://openai.labixiaoxing.cn/v1/chat/completions',
+      reverseProxyUrl: 'https://api.openai.com/v1/chat/completions',
       // (Optional) Parameters as described in https://platform.openai.com/docs/api-reference/completions
       modelOptions: {
         // You can override the model name and any other parameters here, like so:
