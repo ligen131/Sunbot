@@ -19,7 +19,7 @@
   "author": "ligen131 <1353055672@qq.com>",
   "license": "GNU General Public License v3.0",
   "dependencies": {
-    "@waylaidwanderer/chatgpt-api": "^1.35.0",
+    "@waylaidwanderer/chatgpt-api": "^1.37.3",
     "chatgpt": "^5.1.2",
     "child_process": "^1.0.2",
     "dotenv": "^11.0.0",
