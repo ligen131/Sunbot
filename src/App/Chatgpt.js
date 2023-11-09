@@ -117,6 +117,7 @@ A: ${res}
   }
 
   async exec(msg) {
+    if (msg.type() != Sun_bot.Message.Type.Text) return;
     var txt = await msg.text();
     if (!(await isRoom(msg)) || await msg.mentionSelf()) {
       txt = txt.replaceAll(`@${Config.BOT_NAME} `, '');
